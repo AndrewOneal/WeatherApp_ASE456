@@ -11,7 +11,7 @@ abstract class CheckNotification {
   Future<dynamic> checkAlert();
 }
 
-class CheckLocation extends Check {
+class CheckLocation extends CheckNotification {
   var weatherData;
   bool isEmergency = false;
   String message = '';
@@ -20,7 +20,7 @@ class CheckLocation extends Check {
   }
 
   Future<dynamic> fetchData() async {
-    weatherData = await Check.weather.getLocationWeather();
+    weatherData = await CheckNotification.weather.getLocationWeather();
   }
 
   @override
