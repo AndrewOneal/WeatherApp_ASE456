@@ -1,9 +1,9 @@
 import 'weather.dart';
 
-main() async {
-  CheckLocation location = CheckLocation();
-  await location.checkEmergency();
-}
+// main() async {
+//   CheckLocation location = CheckLocation();
+//   await location.checkEmergency();
+// }
 
 abstract class Check {
   static final WeatherModel weather = WeatherModel();
