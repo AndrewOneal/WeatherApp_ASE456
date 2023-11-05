@@ -1,9 +1,9 @@
 import 'weather.dart';
 
-// main() async {
-//   CheckLocation location = CheckLocation();
-//   await location.checkEmergency();
-// }
+main() async {
+  CheckLocation location = CheckLocation();
+  await location.checkEmergency();
+}
 
 abstract class Check {
   static final WeatherModel weather = WeatherModel();
@@ -13,10 +13,10 @@ abstract class Check {
 
 class CheckLocation extends Check {
   var weatherData;
+  bool isEmergency = false;
+  String message = '';
   CheckLocation() {
     weatherData = null;
-    String message = '';
-    bool isEmergency = false;
   }
 
   Future<dynamic> fetchData() async {
@@ -34,8 +34,8 @@ class CheckLocation extends Check {
     // visibility < 100m
     if (weatherData['main']['temp'] > 37.78) {
       print('there will be an emergency');
-      //append emergency string to message
-      //set isEmergency to True
+      isEmergency = true;
+      message += 'There is a heat emergency outside';
     }
   }
 
