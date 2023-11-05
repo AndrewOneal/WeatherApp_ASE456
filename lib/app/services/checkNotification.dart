@@ -5,7 +5,7 @@ main() async {
   await location.checkEmergency();
 }
 
-abstract class Check {
+abstract class CheckNotification {
   static final WeatherModel weather = WeatherModel();
   Future<dynamic> checkEmergency();
   Future<dynamic> checkAlert();
