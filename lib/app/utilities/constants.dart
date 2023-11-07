@@ -70,3 +70,19 @@ class KThemeBorderRadius {
 }
 
 const KMainFlexGap = 10.0;
+
+class KCustomImages {
+  static const String cloud_thunder = 'lib/assets/images/1.png';
+  static const String cloud_rain = 'lib/assets/images/2.png';
+  static const String cloud_diagonalRain = 'lib/assets/images/3.png';
+  static const String cloud_snow = 'lib/assets/images/4.png';
+  static const String cloud_wind = 'lib/assets/images/5.png';
+  static const String sun_normal = 'lib/assets/images/6.png';
+  static const String cloud_sun = 'lib/assets/images/7.png';
+  static const String cloud = 'lib/assets/images/8.png';
+  static const String cloud_blueWind = 'lib/assets/images/9.png';
+  static const String sun_abnormal = 'lib/assets/images/11.png';
+  static const String moon = 'lib/assets/images/12.png';
+  static const String thermometer_hot = 'lib/assets/images/13.png';
+  static const String thermometer_cold = 'lib/assets/images/14.png';
+}

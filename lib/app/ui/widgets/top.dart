@@ -23,10 +23,10 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: <Widget>[
-      Icon(
-        FontAwesomeIcons.cloudRain,
-        size: 28.0,
-        color: Colors.white,
+      Image.asset(
+        KCustomImages.cloud_rain,
+        width: 50,
+        fit: BoxFit.cover,
       ),
       SizedBox(
         width: 10,
