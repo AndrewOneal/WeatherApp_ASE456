@@ -1,4 +1,3 @@
-// Page1.dart
 import 'package:flutter/material.dart';
 
 class Page1 extends StatelessWidget {
