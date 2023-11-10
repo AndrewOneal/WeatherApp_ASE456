@@ -1,4 +1,0 @@
-#Sun Nov 05 13:06:08 EST 2023
-base.0=C\:\\Users\\bryce\\ASE456\\TeamProject\\WeatherApp_ASE456\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
