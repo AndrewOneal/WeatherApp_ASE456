@@ -138,3 +138,5 @@ app.*.symbols
 !.vscode/settings.json
 android/local.properties
 android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+*.java
