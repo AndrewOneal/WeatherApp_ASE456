@@ -135,4 +135,12 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+<<<<<<< HEAD
 !.vscode/settings.json
+=======
+!.vscode/settings.json
+android/local.properties
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+*.java
+>>>>>>> upstream/main
