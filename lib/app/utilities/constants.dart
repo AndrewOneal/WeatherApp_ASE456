@@ -62,7 +62,7 @@ class KThemeBorders {
 }
 
 class KThemeBorderRadius {
-  static final BorderRadius borderRadius_xs = BorderRadius.circular(4.0);
+  static final BorderRadius borderRadius_xs = BorderRadius.circular(6.0);
   static final BorderRadius borderRadius_sm = BorderRadius.circular(8.0);
   static final BorderRadius borderRadius_md = BorderRadius.circular(16.0);
   static final BorderRadius borderRadius_lg = BorderRadius.circular(24.0);
