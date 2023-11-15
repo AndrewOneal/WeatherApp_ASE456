@@ -1,0 +1,126 @@
+{
+  "header": {
+    "cloc_url": "github.com/AlDanial/cloc",
+    "cloc_version": "1.98",
+    "elapsed_seconds": 6.88561820983887,
+    "n_files": 288,
+    "n_lines": 17784,
+    "files_per_second": 41.8263097405657,
+    "lines_per_second": 2582.77462647993,
+    "report_file": "progress/LA/2023-11-14.json"
+  },
+  "JSON": {
+    "nFiles": 108,
+    "blank": 0,
+    "comment": 0,
+    "code": 10235
+  },
+  "XML": {
+    "nFiles": 110,
+    "blank": 208,
+    "comment": 67,
+    "code": 2437
+  },
+  "Dart": {
+    "nFiles": 19,
+    "blank": 118,
+    "comment": 43,
+    "code": 1903
+  },
+  "Text": {
+    "nFiles": 18,
+    "blank": 0,
+    "comment": 0,
+    "code": 1867
+  },
+  "GLSL": {
+    "nFiles": 1,
+    "blank": 0,
+    "comment": 0,
+    "code": 160
+  },
+  "Bourne Again Shell": {
+    "nFiles": 1,
+    "blank": 19,
+    "comment": 20,
+    "code": 121
+  },
+  "Gradle": {
+    "nFiles": 3,
+    "blank": 19,
+    "comment": 5,
+    "code": 94
+  },
+  "Markdown": {
+    "nFiles": 3,
+    "blank": 39,
+    "comment": 0,
+    "code": 82
+  },
+  "DOS Batch": {
+    "nFiles": 1,
+    "blank": 24,
+    "comment": 2,
+    "code": 64
+  },
+  "Java": {
+    "nFiles": 4,
+    "blank": 6,
+    "comment": 14,
+    "code": 41
+  },
+  "HTML": {
+    "nFiles": 1,
+    "blank": 8,
+    "comment": 13,
+    "code": 38
+  },
+  "Properties": {
+    "nFiles": 9,
+    "blank": 0,
+    "comment": 4,
+    "code": 30
+  },
+  "YAML": {
+    "nFiles": 2,
+    "blank": 10,
+    "comment": 22,
+    "code": 30
+  },
+  "Kotlin": {
+    "nFiles": 1,
+    "blank": 2,
+    "comment": 0,
+    "code": 4
+  },
+  "SQL": {
+    "nFiles": 2,
+    "blank": 0,
+    "comment": 0,
+    "code": 4
+  },
+  "D": {
+    "nFiles": 3,
+    "blank": 0,
+    "comment": 0,
+    "code": 3
+  },
+  "CSS": {
+    "nFiles": 1,
+    "blank": 0,
+    "comment": 13,
+    "code": 1
+  },
+  "JavaScript": {
+    "nFiles": 1,
+    "blank": 0,
+    "comment": 13,
+    "code": 1
+  },
+  "SUM": {
+    "blank": 453,
+    "comment": 216,
+    "code": 17115,
+    "nFiles": 288
+  }
+}
