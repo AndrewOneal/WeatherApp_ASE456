@@ -132,7 +132,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ToastManager.showSuccess(
             'Weather data retrieved successfully',
           );
-          // print(weatherData);
         }
       } else {
         weatherData = await weatherModel.getLocationWeather();

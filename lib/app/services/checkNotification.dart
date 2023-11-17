@@ -2,11 +2,6 @@ import 'dart:html';
 
 import 'weather.dart';
 
-// main() async {
-//   CheckLocation location = CheckLocation();
-//   await location.checkEmergency();
-// }
-
 abstract class CheckNotification {
   static final WeatherModel weather = WeatherModel();
   Future<dynamic> checkEmergency();
@@ -29,10 +24,7 @@ class CheckLocation extends CheckNotification {
   checkEmergency() async {
     await fetchData();
 
-    //List of emergencies to detect:
-    //wind gust > 40mph
     if (weatherData['main']['temp'] > 37.78) {
-      //print('hot emergency');
       this.isEmergency = true;
       message +=
           ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS!';
