@@ -9,6 +9,7 @@ import 'package:climate/app/utilities/constants.dart';
 import 'package:climate/app/utilities/custom_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:climate/app/services/checkNotification.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,11 +38,39 @@ class _MyHomePageState extends State<MyHomePage> {
   String searchParam = '';
   var weatherData;
   var pastWeatherData;
+  CheckLocation location = CheckLocation();
 
   @override
   void initState() {
     super.initState();
     _init_weatherData();
+
+    Future.delayed(Duration.zero, () async {
+      if (await checkLocationEmergency()) {
+        showMaterialBanner();
+      }
+    });
+  }
+
+  void showMaterialBanner() {
+    final actions = [
+      TextButton(
+        onPressed: () {
+          ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+        },
+        child: const Text('OK'),
+      )
+    ];
+
+    ScaffoldMessenger.of(context).showMaterialBanner(
+      MaterialBanner(
+        content: Text(
+          'EMERGENCY! ${this.location.message}',
+          style: TextStyle(color: Colors.red),
+        ),
+        actions: actions,
+      ),
+    );
   }
 
   void _init_weatherData() async {
@@ -132,6 +161,10 @@ class _MyHomePageState extends State<MyHomePage> {
       context,
       MaterialPageRoute(builder: (context) => Page2()),
     );
+  }
+
+  Future<bool> checkLocationEmergency() async {
+    return await this.location.checkEmergency();
   }
 
   @override
