@@ -1,3 +1,6 @@
+import 'package:climate/app/utilities/constants.dart';
+import 'package:flutter/material.dart';
+
 import 'location.dart';
 import 'networking.dart';
 
@@ -60,5 +63,68 @@ class WeatherModel {
     } else {
       return 'Bring a 🧥 just in case';
     }
+  }
+
+  Image getWeatherImage(int id) {
+    // Group 2xx: Thunderstorm
+    if (id >= 200 && id <= 232) {
+      return Image.asset(
+        KCustomImages.cloud_thunder,
+        width: 70,
+        fit: BoxFit.cover,
+      );
+    }
+    // Group 3xx: Drizzle
+    else if (id >= 300 && id <= 321) {
+      return Image.asset(
+        KCustomImages.cloud_diagonalRain,
+        width: 70,
+        fit: BoxFit.cover,
+      );
+    }
+    // Group 5xx: Rain
+    else if (id >= 500 && id <= 531) {
+      return Image.asset(
+        KCustomImages.cloud_rain,
+        width: 70,
+        fit: BoxFit.cover,
+      );
+    }
+    // Group 6xx: snow
+    else if (id >= 600 && id <= 631) {
+      return Image.asset(
+        KCustomImages.cloud_snow,
+        width: 70,
+        fit: BoxFit.cover,
+      );
+    }
+    // Group 7xx: atmosphere
+    else if (id >= 700 && id <= 781) {
+      return Image.asset(
+        KCustomImages.cloud_wind,
+        width: 70,
+        fit: BoxFit.cover,
+      );
+    }
+    // Group 8xx: clear/cloud
+    else if (id >= 800 && id <= 804) {
+      return id == 800
+          ? Image.asset(
+              KCustomImages.sun_normal,
+              width: 70,
+              fit: BoxFit.cover,
+            )
+          : Image.asset(
+              KCustomImages.cloud,
+              width: 70,
+              fit: BoxFit.cover,
+            );
+    }
+    // Default icon for unknown weather
+    return Image.asset(
+      KCustomImages.cloud_rain,
+      width: 70,
+      fit: BoxFit.cover,
+    );
   }
 }
