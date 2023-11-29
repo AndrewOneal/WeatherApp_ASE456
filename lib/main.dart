@@ -8,13 +8,6 @@ import 'package:climate/app/ui/widgets/weather_tiny_info.dart';
 import 'package:climate/app/utilities/constants.dart';
 import 'package:climate/app/utilities/custom_toast.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
-import 'package:fluttertoast/fluttertoast.dart';
-<<<<<<< HEAD
->>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
-=======
->>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
 
 void main() => runApp(MyApp());
 
