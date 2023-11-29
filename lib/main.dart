@@ -3,13 +3,13 @@ import 'package:climate/app/ui/screens/mock/page1.dart';
 import 'package:climate/app/ui/screens/mock/page2.dart';
 import 'package:climate/app/ui/widgets/box_widget.dart';
 import 'package:climate/app/ui/widgets/top.dart';
+import 'package:climate/app/ui/widgets/weather_description.dart';
 import 'package:climate/app/ui/widgets/weather_highlights.dart';
 import 'package:climate/app/ui/widgets/weather_tiny_info.dart';
 import 'package:climate/app/utilities/constants.dart';
 import 'package:climate/app/utilities/custom_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:climate/app/services/checkNotification.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,39 +38,11 @@ class _MyHomePageState extends State<MyHomePage> {
   String searchParam = '';
   var weatherData;
   var pastWeatherData;
-  CheckLocation location = CheckLocation();
 
   @override
   void initState() {
     super.initState();
     _init_weatherData();
-
-    Future.delayed(Duration.zero, () async {
-      if (await checkLocationEmergency()) {
-        showMaterialBanner();
-      }
-    });
-  }
-
-  void showMaterialBanner() {
-    final actions = [
-      TextButton(
-        onPressed: () {
-          ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
-        },
-        child: const Text('OK'),
-      )
-    ];
-
-    ScaffoldMessenger.of(context).showMaterialBanner(
-      MaterialBanner(
-        content: Text(
-          'EMERGENCY! ${this.location.message}',
-          style: TextStyle(color: Colors.red),
-        ),
-        actions: actions,
-      ),
-    );
   }
 
   void _init_weatherData() async {
@@ -132,6 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ToastManager.showSuccess(
             'Weather data retrieved successfully',
           );
+          // print(weatherData);
         }
       } else {
         weatherData = await weatherModel.getLocationWeather();
@@ -162,145 +135,136 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<bool> checkLocationEmergency() async {
-    return await this.location.checkEmergency();
-  }
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth <= 600;
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(200.0),
-          child: Top(
-            onSearch: onSearch,
-            onNavigateToPage1: navigateToPage1,
-            onNavigateToPage2: navigateToPage2,
-          ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(200.0),
+        child: Top(
+          onSearch: onSearch,
+          onNavigateToPage1: navigateToPage1,
+          onNavigateToPage2: navigateToPage2,
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.all(16.0),
-            child: isLoading
-                ? Center(child: CircularProgressIndicator())
-                : isMobile
-                    ? Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          children: [
-                            IntrinsicHeight(
-                              child: WeatherTinyInfo(
-                                weatherData: weatherData,
-                              ),
-                            ),
-                            SizedBox(height: KMainFlexGap),
-                            IntrinsicHeight(
-                              child:
-                                  WeatherHighlights(weatherData: weatherData),
-                            ),
-                            SizedBox(height: KMainFlexGap),
-                            IntrinsicHeight(
-                              child: BoxWidget(
-                                color: Colors.blue,
-                                border: KThemeBorders.border_md,
-                                borderRadius:
-                                    KThemeBorderRadius.borderRadius_md,
-                              ),
-                            ),
-                            SizedBox(height: KMainFlexGap),
-                            BoxWidget(
-                              color: Colors.orange,
-                              border: KThemeBorders.border_md,
-                              borderRadius: KThemeBorderRadius.borderRadius_md,
-                              height: 300,
-                            ),
-                            SizedBox(height: KMainFlexGap),
-                            BoxWidget(
-                              color: Colors.purple,
-                              border: KThemeBorders.border_md,
-                              borderRadius: KThemeBorderRadius.borderRadius_md,
-                              height: 300,
-                            ),
-                          ],
-                        ),
-                      )
-                    : Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          child: isLoading
+              ? Center(child: CircularProgressIndicator())
+              : isMobile
+                  ? Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
                         children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * .285,
-                            child: Column(
-                              children: [
-                                IntrinsicHeight(
-                                  child: WeatherTinyInfo(
-                                    weatherData: weatherData,
-                                  ),
-                                ),
-                                SizedBox(height: KMainFlexGap),
-                                IntrinsicHeight(
-                                  child: BoxWidget(
-                                    color: Colors.blue,
-                                    border: KThemeBorders.border_md,
-                                    borderRadius:
-                                        KThemeBorderRadius.borderRadius_md,
-                                  ),
-                                ),
-                              ],
+                          IntrinsicHeight(
+                            child: WeatherTinyInfo(
+                              weatherData: weatherData,
                             ),
                           ),
-                          SizedBox(
-                            width: KMainFlexGap,
+                          SizedBox(height: KMainFlexGap),
+                          IntrinsicHeight(
+                            child: WeatherHighlights(weatherData: weatherData),
                           ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * .685,
-                            height: 1200,
-                            child: Column(
-                              children: [
-                                IntrinsicHeight(
-                                  child: WeatherHighlights(
-                                      weatherData: weatherData),
-                                ),
-                                SizedBox(height: KMainFlexGap),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: BoxWidget(
-                                        color: Colors.orange,
-                                        border: KThemeBorders.border_md,
-                                        borderRadius:
-                                            KThemeBorderRadius.borderRadius_md,
-                                        height: 300,
-                                      ),
-                                    ),
-                                    SizedBox(width: KMainFlexGap),
-                                    Expanded(
-                                      child: BoxWidget(
-                                        color: Colors.purple,
-                                        border: KThemeBorders.border_md,
-                                        borderRadius:
-                                            KThemeBorderRadius.borderRadius_md,
-                                        height: 300,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: KMainFlexGap),
-                                IntrinsicHeight(
-                                  child: BoxWidget(
-                                    color: Colors.yellow,
-                                    border: KThemeBorders.border_md,
-                                    borderRadius:
-                                        KThemeBorderRadius.borderRadius_md,
-                                    height: 300,
-                                  ),
-                                ),
-                              ],
+                          SizedBox(height: KMainFlexGap),
+                          IntrinsicHeight(
+                            child: BoxWidget(
+                              color: Colors.blue,
+                              border: KThemeBorders.border_md,
+                              borderRadius: KThemeBorderRadius.borderRadius_md,
                             ),
+                          ),
+                          SizedBox(height: KMainFlexGap),
+                          BoxWidget(
+                            color: Colors.orange,
+                            border: KThemeBorders.border_md,
+                            borderRadius: KThemeBorderRadius.borderRadius_md,
+                            height: 300,
+                          ),
+                          SizedBox(height: KMainFlexGap),
+                          BoxWidget(
+                            color: Colors.purple,
+                            border: KThemeBorders.border_md,
+                            borderRadius: KThemeBorderRadius.borderRadius_md,
+                            height: 300,
                           ),
                         ],
                       ),
-          ),
-        ));
+                    )
+                  : Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * .285,
+                          child: Column(
+                            children: [
+                              IntrinsicHeight(
+                                child: WeatherTinyInfo(
+                                  weatherData: weatherData,
+                                ),
+                              ),
+                              SizedBox(height: KMainFlexGap),
+                              IntrinsicHeight(
+                                child: BoxWidget(
+                                  color: Colors.blue,
+                                  border: KThemeBorders.border_md,
+                                  borderRadius:
+                                      KThemeBorderRadius.borderRadius_md,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: KMainFlexGap,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * .685,
+                          height: 1200,
+                          child: Column(
+                            children: [
+                              IntrinsicHeight(
+                                child:
+                                    WeatherHighlights(weatherData: weatherData),
+                              ),
+                              SizedBox(height: KMainFlexGap),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: WeatherDescription(
+                                        weatherData: weatherData),
+                                  ),
+                                  SizedBox(width: KMainFlexGap),
+                                  Expanded(
+                                    child: BoxWidget(
+                                      color: Colors.purple,
+                                      border: KThemeBorders.border_md,
+                                      borderRadius:
+                                          KThemeBorderRadius.borderRadius_md,
+                                      height: 300,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: KMainFlexGap),
+                              IntrinsicHeight(
+                                child: BoxWidget(
+                                  color: Colors.yellow,
+                                  border: KThemeBorders.border_md,
+                                  borderRadius:
+                                      KThemeBorderRadius.borderRadius_md,
+                                  height: 300,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+        ),
+      ),
+    );
   }
 }
