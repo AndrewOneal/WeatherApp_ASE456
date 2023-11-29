@@ -26,17 +26,12 @@ class CheckLocation extends CheckNotification {
   @override
   checkEmergency() async {
     await fetchData();
-
-    //List of emergencies to detect:
-    //wind gust > 40mph
-    //temp > 100F
-    // >50mm of rainfall/snow
-    // visibility < 100m
     if (weatherData['main']['temp'] > 37.78) {
       print('there will be an emergency');
       isEmergency = true;
       message += 'There is a heat emergency outside';
     }
+    return this.isEmergency;
   }
 
   @override
