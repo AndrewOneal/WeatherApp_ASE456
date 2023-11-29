@@ -11,6 +11,9 @@ import 'package:flutter/material.dart';
 <<<<<<< HEAD
 =======
 import 'package:fluttertoast/fluttertoast.dart';
+<<<<<<< HEAD
+>>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
+=======
 >>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
 
 void main() => runApp(MyApp());

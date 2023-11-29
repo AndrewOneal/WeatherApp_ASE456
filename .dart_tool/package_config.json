@@ -164,6 +164,9 @@
 =======
       "name": "http",
       "rootUri": "file:///C:/Users/admasul1/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6",
+<<<<<<< HEAD
+>>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
+=======
 >>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
       "packageUri": "lib/",
       "languageVersion": "2.19"
@@ -226,6 +229,7 @@
       "name": "meta",
       "rootUri": "file:///C:/Users/admasul1/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.9.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -244,6 +248,8 @@
     {
       "name": "package_config",
       "rootUri": "file:///C:/Users/admasul1/AppData/Local/Pub/Cache/hosted/pub.dev/package_config-2.1.0",
+=======
+>>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
 =======
 >>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
       "packageUri": "lib/",
@@ -355,12 +361,15 @@
       "name": "test_api",
       "rootUri": "file:///C:/Users/admasul1/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.6.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "test_core",
       "rootUri": "file:///C:/Users/admasul1/AppData/Local/Pub/Cache/hosted/pub.dev/test_core-0.5.3",
+=======
+>>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
 =======
 >>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
       "packageUri": "lib/",
@@ -422,7 +431,11 @@
     }
   ],
 <<<<<<< HEAD
+<<<<<<< HEAD
   "generated": "2023-11-27T03:41:50.747739Z",
+=======
+  "generated": "2023-11-14T21:30:55.785753Z",
+>>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
 =======
   "generated": "2023-11-14T21:30:55.785753Z",
 >>>>>>> parent of ac5825c (Merge pull request #4 from brycebien/main)
