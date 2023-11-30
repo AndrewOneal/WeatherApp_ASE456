@@ -28,7 +28,7 @@ class CheckLocation extends CheckNotification {
     await fetchData();
 
     if (weatherData['main']['temp'] > 37.78) {
-      this.isEmergency = true;
+      isEmergency = true;
       message +=
           ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS!';
     } else if (weatherData['main']['temp'] < -15) {
@@ -48,7 +48,7 @@ class CheckLocation extends CheckNotification {
       message +=
           ' wind gusts are at ${(weatherData['wind']['gust'] * 2.23694).floor()} mph';
     }
-    return this.isEmergency;
+    return isEmergency;
   }
 
   @override
