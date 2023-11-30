@@ -37,6 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
   String searchParam = '';
   var weatherData;
   var pastWeatherData;
+  bool temperature = false;
+  bool visibility = false;
+  bool wind = false;
   CheckLocation location = CheckLocation();
 
   @override

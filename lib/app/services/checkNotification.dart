@@ -1,9 +1,6 @@
-import 'weather.dart';
+import 'package:flutter/material.dart';
 
-main() async {
-  CheckLocation location = CheckLocation();
-  await location.checkEmergency();
-}
+import 'weather.dart';
 
 abstract class CheckNotification {
   static final WeatherModel weather = WeatherModel();
@@ -15,11 +12,7 @@ class CheckLocation extends CheckNotification {
   var weatherData;
   bool notify = false;
   String message = '';
-  var userSettings = {
-    'temp': true,
-    'visibility': true,
-    'wind': true,
-  };
+  var userSettings = {'temperature': true, 'visibility': true, 'wind': true};
 
   CheckLocation() {
     weatherData = null;
@@ -61,9 +54,8 @@ class CheckLocation extends CheckNotification {
   @override
   checkAlert() async {
     await fetchData();
-
     if (weatherData != null) {
-      if (userSettings['temp']! || true) {
+      if (userSettings['temperature']!) {
         notify = true;
         message += 'return true and apped message temp\n';
       }
