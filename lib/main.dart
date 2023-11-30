@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String searchParam = '';
   var weatherData;
   var pastWeatherData;
-  Map<String, double> settings = {};
+  Map<String, double?> settings = {};
   CheckLocation location = CheckLocation();
 
   @override
@@ -160,10 +160,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
     setState(() {
-      this.settings['minTemperature'] = results['minTemperature'] ?? -100;
-      this.settings['maxTemperature'] = results['maxTemperature'] ?? 1000;
-      this.settings['visibility'] = results['visibility'] ?? -1;
-      this.settings['wind'] = results['wind'] ?? 1000;
+      this.settings['minTemperature'] = results['minTemperature'];
+      this.settings['maxTemperature'] = results['maxTemperature'];
+      this.settings['visibility'] = results['visibility'];
+      this.settings['wind'] = results['wind'];
     });
     checkLocationEmergency();
   }

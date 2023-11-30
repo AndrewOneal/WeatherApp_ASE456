@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class Page2 extends StatefulWidget {
-  Map<String, double> userSettings;
+  Map<String, double?> userSettings;
   Page2({required this.userSettings});
   @override
   _Page2State createState() => _Page2State();
 }
 
 class _Page2State extends State<Page2> {
-  late double minTemperature;
-  late double maxTemperature;
-  late double visibility;
-  late double wind;
+  late double? minTemperature;
+  late double? maxTemperature;
+  late double? visibility;
+  late double? wind;
 
   late TextEditingController minTemperatureController;
   late TextEditingController maxTemperatureController;
@@ -21,15 +21,19 @@ class _Page2State extends State<Page2> {
   @override
   void initState() {
     super.initState();
-    // minTemperature = widget.userSettings['minTemperature'] ?? 0;
-    // maxTemperature = widget.userSettings['maxTemperature'] ?? 0;
-    // visibility = widget.userSettings['visibility'] ?? 0;
-    // wind = widget.userSettings['wind'] ?? 0;
+    minTemperature = widget.userSettings['minTemperature'];
+    maxTemperature = widget.userSettings['maxTemperature'];
+    visibility = widget.userSettings['visibility'];
+    wind = widget.userSettings['wind'];
 
-    minTemperatureController = TextEditingController();
-    maxTemperatureController = TextEditingController();
-    visibilityController = TextEditingController();
-    windSpeedController = TextEditingController();
+    minTemperatureController = TextEditingController(
+        text: minTemperature != null ? minTemperature.toString() : '');
+    maxTemperatureController = TextEditingController(
+        text: maxTemperature != null ? maxTemperature.toString() : '');
+    visibilityController = TextEditingController(
+        text: visibility != null ? visibility.toString() : '');
+    windSpeedController =
+        TextEditingController(text: wind != null ? wind.toString() : '');
   }
 
   double? parseDoubleOrNull(String input) {
@@ -56,7 +60,7 @@ class _Page2State extends State<Page2> {
                 controller: minTemperatureController,
                 onChanged: (value) {
                   setState(() {
-                    minTemperature = double.parse(value);
+                    minTemperature = parseDoubleOrNull(value);
                   });
                 },
               ),
@@ -68,7 +72,7 @@ class _Page2State extends State<Page2> {
                 controller: maxTemperatureController,
                 onChanged: (value) {
                   setState(() {
-                    maxTemperature = double.parse(value);
+                    maxTemperature = parseDoubleOrNull(value);
                   });
                 },
               ),
@@ -80,7 +84,7 @@ class _Page2State extends State<Page2> {
                 controller: visibilityController,
                 onChanged: (value) {
                   setState(() {
-                    visibility = double.parse(value);
+                    visibility = parseDoubleOrNull(value);
                   });
                 },
               ),
@@ -92,7 +96,7 @@ class _Page2State extends State<Page2> {
                 controller: windSpeedController,
                 onChanged: (value) {
                   setState(() {
-                    wind = double.parse(value);
+                    wind = parseDoubleOrNull(value);
                   });
                 },
               ),
@@ -101,12 +105,10 @@ class _Page2State extends State<Page2> {
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context, {
-                  'minTemperature':
-                      parseDoubleOrNull(minTemperatureController.text),
-                  'maxTemperature':
-                      parseDoubleOrNull(maxTemperatureController.text),
-                  'visibility': parseDoubleOrNull(visibilityController.text),
-                  'wind': parseDoubleOrNull(windSpeedController.text)
+                  'minTemperature': minTemperature,
+                  'maxTemperature': maxTemperature,
+                  'visibility': visibility,
+                  'wind': wind
                 });
               },
               child: const Text('Save Settings'),
