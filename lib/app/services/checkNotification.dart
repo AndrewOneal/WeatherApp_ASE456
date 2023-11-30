@@ -1,9 +1,6 @@
-import 'weather.dart';
+import 'package:flutter/material.dart';
 
-main() async {
-  CheckLocation location = CheckLocation();
-  await location.checkEmergency();
-}
+import 'weather.dart';
 
 abstract class CheckNotification {
   static final WeatherModel weather = WeatherModel();
@@ -13,8 +10,10 @@ abstract class CheckNotification {
 
 class CheckLocation extends CheckNotification {
   var weatherData;
-  bool isEmergency = false;
+  bool notify = false;
   String message = '';
+  var userSettings = {'temperature': true, 'visibility': true, 'wind': true};
+
   CheckLocation() {
     weatherData = null;
   }
@@ -26,33 +25,49 @@ class CheckLocation extends CheckNotification {
   @override
   checkEmergency() async {
     await fetchData();
-
-    if (weatherData['main']['temp'] > 37.78) {
-      isEmergency = true;
-      message +=
-          ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS!';
-    } else if (weatherData['main']['temp'] < -15) {
-      print('cold emergency');
-      isEmergency = true;
-      message +=
-          ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS';
+    if (weatherData != null) {
+      if (weatherData['main']['temp'] > 37.78) {
+        notify = true;
+        message +=
+            ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS!\n';
+      } else if (weatherData['main']['temp'] < -15) {
+        print('cold emergency');
+        notify = true;
+        message +=
+            ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS\n';
+      }
+      if (weatherData['visibility'] < 100) {
+        print('visibility emergency');
+        notify = true;
+        message +=
+            ' The visibility is about ${(weatherData['visibility'] / 1609).floor()}mi - USE CAUTION WHEN DRIVING\n';
+      }
+      if (weatherData['wind']['speed'] > 44.704 || true) {
+        notify = true;
+        message +=
+            ' wind gusts are at ${(weatherData['wind']['speed'] * 2.23694).floor()} mph\n';
+      }
     }
-    if (weatherData['visibility'] < 100) {
-      print('visibility emergency');
-      isEmergency = true;
-      message +=
-          ' The visibility is about ${(weatherData['visibility'] / 1609).floor()}mi - USE CAUTION WHEN DRIVING';
-    }
-    if (weatherData['wind']['gust'] > 44.704) {
-      isEmergency = true;
-      message +=
-          ' wind gusts are at ${(weatherData['wind']['gust'] * 2.23694).floor()} mph';
-    }
-    return isEmergency;
+    return notify;
   }
 
   @override
   checkAlert() async {
-    print('check Alert');
+    await fetchData();
+    if (weatherData != null) {
+      if (userSettings['temperature']!) {
+        notify = true;
+        message += 'return true and apped message temp\n';
+      }
+      if (userSettings['visibility']!) {
+        notify = true;
+        message += 'return true and apped message visibility\n';
+      }
+      if (userSettings['wind']!) {
+        notify = true;
+        message += 'return true and apped message wind\n';
+      }
+    }
+    return notify;
   }
 }

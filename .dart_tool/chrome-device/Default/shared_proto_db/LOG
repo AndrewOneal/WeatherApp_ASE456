@@ -1,7 +1,5 @@
-2023/11/29-20:01:51.013 4fd0 Reusing MANIFEST C:\Users\bryce\AppData\Local\Temp\flutter_tools.1f808d26\flutter_tools_chrome_device.774b4059\Default\shared_proto_db/MANIFEST-000001
-2023/11/29-20:01:51.014 4fd0 Recovering log #4
-2023/11/29-20:01:51.016 4fd0 Reusing old log C:\Users\bryce\AppData\Local\Temp\flutter_tools.1f808d26\flutter_tools_chrome_device.774b4059\Default\shared_proto_db/000004.log 
-2023/11/29-20:01:51.016 4fd0 Delete type=0 #3
-2023/11/29-20:02:15.846 2734 Level-0 table #8: started
-2023/11/29-20:02:15.851 2734 Level-0 table #8: 135523 bytes OK
-2023/11/29-20:02:15.854 2734 Delete type=0 #4
+2023/11/29-21:28:39.955 3030 Reusing MANIFEST C:\Users\bryce\AppData\Local\Temp\flutter_tools.a2453d12\flutter_tools_chrome_device.8aecd1b5\Default\shared_proto_db/MANIFEST-000001
+2023/11/29-21:28:39.956 3030 Recovering log #7
+2023/11/29-21:28:39.958 3030 Reusing old log C:\Users\bryce\AppData\Local\Temp\flutter_tools.a2453d12\flutter_tools_chrome_device.8aecd1b5\Default\shared_proto_db/000007.log 
+2023/11/29-21:28:39.959 3030 Delete type=0 #3
+2023/11/29-21:28:39.959 3030 Delete type=0 #4

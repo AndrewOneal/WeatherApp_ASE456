@@ -37,6 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
   String searchParam = '';
   var weatherData;
   var pastWeatherData;
+  bool temperature = false;
+  bool visibility = false;
+  bool wind = false;
   CheckLocation location = CheckLocation();
 
   @override
@@ -44,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _init_weatherData();
 
-    Future.delayed(Duration.zero, () async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (await checkLocationEmergency()) {
         showMaterialBanner();
       }
@@ -131,7 +134,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ToastManager.showSuccess(
             'Weather data retrieved successfully',
           );
-          // print(weatherData);
         }
       } else {
         weatherData = await weatherModel.getLocationWeather();
@@ -163,7 +165,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<bool> checkLocationEmergency() async {
-    return await this.location.checkEmergency();
+    bool emergency = await this.location.checkEmergency();
+    bool alert = await this.location.checkAlert();
+    if (emergency || alert) {
+      return true;
+    }
+    return false;
   }
 
   @override
