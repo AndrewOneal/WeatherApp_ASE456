@@ -44,7 +44,13 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _init_weatherData();
 
-    Future.delayed(Duration.zero, () async {
+    // Future.delayed(Duration.zero, () async {
+    //   if (await checkLocationEmergency()) {
+    //     showMaterialBanner();
+    //   }
+    // });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (await checkLocationEmergency()) {
         showMaterialBanner();
       }
@@ -131,7 +137,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ToastManager.showSuccess(
             'Weather data retrieved successfully',
           );
-          // print(weatherData);
         }
       } else {
         weatherData = await weatherModel.getLocationWeather();
