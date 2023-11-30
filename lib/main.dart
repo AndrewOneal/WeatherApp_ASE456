@@ -44,12 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _init_weatherData();
 
-    // Future.delayed(Duration.zero, () async {
-    //   if (await checkLocationEmergency()) {
-    //     showMaterialBanner();
-    //   }
-    // });
-
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (await checkLocationEmergency()) {
         showMaterialBanner();
@@ -168,7 +162,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<bool> checkLocationEmergency() async {
-    return await this.location.checkEmergency();
+    bool emergency = await this.location.checkEmergency();
+    bool alert = await this.location.checkAlert();
+    if (emergency || alert) {
+      return true;
+    }
+    return false;
   }
 
   @override

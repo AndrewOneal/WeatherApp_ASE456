@@ -13,8 +13,14 @@ abstract class CheckNotification {
 
 class CheckLocation extends CheckNotification {
   var weatherData;
-  bool isEmergency = false;
+  bool notify = false;
   String message = '';
+  var userSettings = {
+    'temp': true,
+    'visibility': true,
+    'wind': true,
+  };
+
   CheckLocation() {
     weatherData = null;
   }
@@ -28,32 +34,48 @@ class CheckLocation extends CheckNotification {
     await fetchData();
     if (weatherData != null) {
       if (weatherData['main']['temp'] > 37.78) {
-        isEmergency = true;
+        notify = true;
         message +=
-            ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS!';
+            ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS!\n';
       } else if (weatherData['main']['temp'] < -15) {
         print('cold emergency');
-        isEmergency = true;
+        notify = true;
         message +=
-            ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS';
+            ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS\n';
       }
       if (weatherData['visibility'] < 100) {
         print('visibility emergency');
-        isEmergency = true;
+        notify = true;
         message +=
-            ' The visibility is about ${(weatherData['visibility'] / 1609).floor()}mi - USE CAUTION WHEN DRIVING';
+            ' The visibility is about ${(weatherData['visibility'] / 1609).floor()}mi - USE CAUTION WHEN DRIVING\n';
       }
-      if (weatherData['wind']['speed'] > 44.704) {
-        isEmergency = true;
+      if (weatherData['wind']['speed'] > 44.704 || true) {
+        notify = true;
         message +=
-            ' wind gusts are at ${(weatherData['wind']['gust'] * 2.23694).floor()} mph';
+            ' wind gusts are at ${(weatherData['wind']['speed'] * 2.23694).floor()} mph\n';
       }
     }
-    return isEmergency;
+    return notify;
   }
 
   @override
   checkAlert() async {
-    print('check Alert');
+    await fetchData();
+
+    if (weatherData != null) {
+      if (userSettings['temp']! || true) {
+        notify = true;
+        message += 'return true and apped message temp\n';
+      }
+      if (userSettings['visibility']!) {
+        notify = true;
+        message += 'return true and apped message visibility\n';
+      }
+      if (userSettings['wind']!) {
+        notify = true;
+        message += 'return true and apped message wind\n';
+      }
+    }
+    return notify;
   }
 }
