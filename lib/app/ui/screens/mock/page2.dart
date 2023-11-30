@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 
 class Page2 extends StatefulWidget {
-  Map<String, bool> userSettings;
+  Map<String, double> userSettings;
   Page2({required this.userSettings});
   @override
   _Page2State createState() => _Page2State();
 }
 
 class _Page2State extends State<Page2> {
-  late bool temperature;
-  late bool visibility;
-  late bool wind;
+  late double minTemperature;
+  late double maxTemperature;
+  late double visibility;
+  late double wind;
 
   @override
   void initState() {
     super.initState();
-    temperature = widget.userSettings['temperature'] ?? false;
-    visibility = widget.userSettings['visibility'] ?? false;
-    wind = widget.userSettings['wind'] ?? false;
+    minTemperature = widget.userSettings['minTemperature'] ?? 0;
+    maxTemperature = widget.userSettings['maxTemperature'] ?? 0;
+    visibility = widget.userSettings['visibility'] ?? 0;
+    wind = widget.userSettings['wind'] ?? 0;
   }
 
   @override
@@ -29,38 +31,56 @@ class _Page2State extends State<Page2> {
       body: Center(
         child: Column(
           children: [
-            CheckboxListTile(
-              title: const Text('Notify Temperature (high and low)'),
-              value: temperature,
-              onChanged: (newValue) {
-                setState(() {
-                  temperature = newValue ?? false;
-                });
-              },
+            ListTile(
+              title: const Text('Min Temperature to be notified'),
+              subtitle: TextFormField(
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  setState(() {
+                    minTemperature = double.parse(value);
+                  });
+                },
+              ),
             ),
-            CheckboxListTile(
-              title: const Text('Notify Visibility'),
-              value: visibility,
-              onChanged: (newValue) {
-                setState(() {
-                  visibility = newValue ?? false;
-                });
-              },
+            ListTile(
+              title: const Text('Max Temperature to be notified'),
+              subtitle: TextFormField(
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  setState(() {
+                    maxTemperature = double.parse(value);
+                  });
+                },
+              ),
             ),
-            CheckboxListTile(
-              title: const Text('Notify Wind High Speeds'),
-              value: wind,
-              onChanged: (newValue) {
-                setState(() {
-                  wind = newValue ?? false;
-                });
-              },
+            ListTile(
+              title: const Text('Min Visibility to be notified'),
+              subtitle: TextFormField(
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  setState(() {
+                    visibility = double.parse(value);
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: const Text('Min Wind Speed to be notified'),
+              subtitle: TextFormField(
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  setState(() {
+                    wind = double.parse(value);
+                  });
+                },
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context, {
-                    'temperature': temperature,
+                    'minTemperature': minTemperature,
+                    'maxTemperature': maxTemperature,
                     'visibility': visibility,
                     'wind': wind
                   });

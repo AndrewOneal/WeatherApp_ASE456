@@ -37,10 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String searchParam = '';
   var weatherData;
   var pastWeatherData;
-  // bool temperature = false;
-  // bool visibility = false;
-  // bool wind = false;
-  var settings = {'temperature': false, 'visibility': false, 'wind': false};
+  Map<String, double> settings = {};
   CheckLocation location = CheckLocation();
 
   @override
@@ -157,14 +154,16 @@ class _MyHomePageState extends State<MyHomePage> {
     final results = await Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => Page2(
-                userSettings: settings,
-              )),
+        builder: (context) => Page2(
+          userSettings: settings,
+        ),
+      ),
     );
     setState(() {
-      this.settings['temperature'] = results['temperature'] ?? false;
-      this.settings['visibility'] = results['visibility'] ?? false;
-      this.settings['wind'] = results['wind'] ?? false;
+      this.settings['minTemperature'] = results['minTemperature'] ?? -100;
+      this.settings['maxTempterature'] = results['maxTempterature'] ?? 1000;
+      this.settings['visibility'] = results['visibility'] ?? -1;
+      this.settings['wind'] = results['wind'] ?? 1000;
     });
     checkLocationEmergency();
   }
