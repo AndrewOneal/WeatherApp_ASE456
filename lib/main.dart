@@ -46,12 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _init_weatherData();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (await checkLocationEmergency()) {
-        showMaterialBanner();
-      }
-    });
   }
 
   void showMaterialBanner() {
@@ -95,6 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         isLoading = false;
       });
+      if (checkLocationEmergency()) showMaterialBanner();
     }
   }
 
@@ -164,9 +159,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<bool> checkLocationEmergency() async {
-    bool emergency = await this.location.checkEmergency();
-    bool alert = await this.location.checkAlert();
+  bool checkLocationEmergency() {
+    bool emergency = this.location.checkEmergency(weatherData);
+    bool alert = this.location.checkAlert(weatherData);
     if (emergency || alert) {
       return true;
     }

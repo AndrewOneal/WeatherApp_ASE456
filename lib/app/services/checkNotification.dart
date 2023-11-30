@@ -3,28 +3,16 @@ import 'package:flutter/material.dart';
 import 'weather.dart';
 
 abstract class CheckNotification {
-  static final WeatherModel weather = WeatherModel();
-  Future<dynamic> checkEmergency();
-  Future<dynamic> checkAlert();
+  bool checkEmergency(var weatherData);
+  bool checkAlert(var weatherData);
 }
 
 class CheckLocation extends CheckNotification {
-  var weatherData;
   bool notify = false;
   String message = '';
   var userSettings = {'temperature': true, 'visibility': true, 'wind': true};
-
-  CheckLocation() {
-    weatherData = null;
-  }
-
-  Future<dynamic> fetchData() async {
-    weatherData = await CheckNotification.weather.getLocationWeather();
-  }
-
   @override
-  checkEmergency() async {
-    await fetchData();
+  bool checkEmergency(var weatherData) {
     if (weatherData != null) {
       if (weatherData['main']['temp'] > 37.78) {
         notify = true;
@@ -52,8 +40,7 @@ class CheckLocation extends CheckNotification {
   }
 
   @override
-  checkAlert() async {
-    await fetchData();
+  checkAlert(var weatherData) async {
     if (weatherData != null) {
       if (userSettings['temperature']!) {
         notify = true;
