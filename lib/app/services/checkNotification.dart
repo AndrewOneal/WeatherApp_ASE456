@@ -42,21 +42,24 @@ class CheckLocation extends CheckNotification {
   bool checkAlert(var weatherData, var userSettings) {
     String alertMessage = '';
     if (weatherData != null) {
-      if (userSettings['minTemperature'] > weatherData['main']['temp']) {
-        notify = true;
-        alertMessage +=
-            'ALERT: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F\n';
-      } else if (userSettings['maxTemperature'] < weatherData['main']['temp']) {
+      if (userSettings['minTemperature'] >=
+          (weatherData['main']['temp']) * (9 / 5) + 32) {
         notify = true;
         alertMessage +=
             'ALERT: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F\n';
       }
-      if (userSettings['visibility'] > weatherData['visibility']) {
+      if (userSettings['maxTemperature'] <=
+          (weatherData['main']['temp']) * (9 / 5) + 32) {
+        notify = true;
+        alertMessage +=
+            'ALERT: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F\n';
+      }
+      if (userSettings['visibility'] >= (weatherData['visibility'] / 1609)) {
         notify = true;
         alertMessage +=
             'ALERT: The visibility is about ${(weatherData['visibility'] / 1609).floor()}mi\n';
       }
-      if (userSettings['wind'] < weatherData['wind']['speed']) {
+      if (userSettings['wind'] <= weatherData['wind']['speed']) {
         notify = true;
         alertMessage +=
             'ALERT: wind speeds are at ${(weatherData['wind']['speed'] * 2.23694).floor()} mph\n';

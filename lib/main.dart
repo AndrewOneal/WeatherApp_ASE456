@@ -161,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     setState(() {
       this.settings['minTemperature'] = results['minTemperature'] ?? -100;
-      this.settings['maxTempterature'] = results['maxTempterature'] ?? 1000;
+      this.settings['maxTemperature'] = results['maxTemperature'] ?? 1000;
       this.settings['visibility'] = results['visibility'] ?? -1;
       this.settings['wind'] = results['wind'] ?? 1000;
     });
