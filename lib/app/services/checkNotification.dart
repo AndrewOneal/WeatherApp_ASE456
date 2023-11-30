@@ -45,15 +45,18 @@ class CheckLocation extends CheckNotification {
     if (weatherData != null) {
       if (userSettings['temperature']!) {
         notify = true;
-        alertMessage += 'ALERT: return true and apped message temp\n';
+        alertMessage +=
+            'ALERT: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F\n';
       }
       if (userSettings['visibility']!) {
         notify = true;
-        alertMessage += 'ALERT: return true and apped message visibility\n';
+        alertMessage +=
+            'ALERT: The visibility is about ${(weatherData['visibility'] / 1609).floor()}mi\n';
       }
       if (userSettings['wind']!) {
         notify = true;
-        alertMessage += 'ALERT: return true and apped message wind\n';
+        alertMessage +=
+            'ALERT: wind gusts are at ${(weatherData['wind']['speed'] * 2.23694).floor()} mph\n';
       }
     }
     message += alertMessage;
