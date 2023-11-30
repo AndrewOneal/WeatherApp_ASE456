@@ -37,9 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
   String searchParam = '';
   var weatherData;
   var pastWeatherData;
-  bool temperature = false;
-  bool visibility = false;
-  bool wind = false;
+  // bool temperature = false;
+  // bool visibility = false;
+  // bool wind = false;
+  var settings = {'temperature': false, 'visibility': false, 'wind': false};
   CheckLocation location = CheckLocation();
 
   @override
@@ -48,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _init_weatherData();
   }
 
-  void showMaterialBanner() {
+  void showNotification() {
     final actions = [
       TextButton(
         onPressed: () {
@@ -61,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ScaffoldMessenger.of(context).showMaterialBanner(
       MaterialBanner(
         content: Text(
-          'EMERGENCY! ${this.location.message}',
+          '${location.message}',
           style: TextStyle(color: Colors.red),
         ),
         actions: actions,
@@ -89,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         isLoading = false;
       });
-      if (checkLocationEmergency()) showMaterialBanner();
+      checkLocationEmergency();
     }
   }
 
@@ -152,20 +153,29 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void navigateToPage2() {
-    Navigator.push(
+  void navigateToPage2() async {
+    final results = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Page2()),
+      MaterialPageRoute(
+          builder: (context) => Page2(
+                userSettings: settings,
+              )),
     );
+    setState(() {
+      this.settings['temperature'] = results['temperature'] ?? false;
+      this.settings['visibility'] = results['visibility'] ?? false;
+      this.settings['wind'] = results['wind'] ?? false;
+    });
+    checkLocationEmergency();
   }
 
-  bool checkLocationEmergency() {
-    bool emergency = this.location.checkEmergency(weatherData);
-    bool alert = this.location.checkAlert(weatherData);
+  void checkLocationEmergency() {
+    location.message = '';
+    bool emergency = location.checkEmergency(weatherData);
+    bool alert = location.checkAlert(weatherData, settings);
     if (emergency || alert) {
-      return true;
+      showNotification();
     }
-    return false;
   }
 
   @override
