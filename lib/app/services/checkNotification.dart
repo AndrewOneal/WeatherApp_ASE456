@@ -3,71 +3,77 @@ import 'package:flutter/material.dart';
 import 'weather.dart';
 
 abstract class CheckNotification {
-  static final WeatherModel weather = WeatherModel();
-  Future<dynamic> checkEmergency();
-  Future<dynamic> checkAlert();
+  bool checkEmergency(var weatherData);
+  bool checkAlert(var weatherData, Map<String, double?> userSettings);
 }
 
 class CheckLocation extends CheckNotification {
-  var weatherData;
   bool notify = false;
   String message = '';
-  var userSettings = {'temperature': true, 'visibility': true, 'wind': true};
-
-  CheckLocation() {
-    weatherData = null;
-  }
-
-  Future<dynamic> fetchData() async {
-    weatherData = await CheckNotification.weather.getLocationWeather();
-  }
-
   @override
-  checkEmergency() async {
-    await fetchData();
+  bool checkEmergency(var weatherData) {
+    String emergencyMessage = '';
     if (weatherData != null) {
       if (weatherData['main']['temp'] > 37.78) {
         notify = true;
-        message +=
-            ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS!\n';
+        emergencyMessage +=
+            'EMERGENCY: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS!\n';
       } else if (weatherData['main']['temp'] < -15) {
-        print('cold emergency');
         notify = true;
-        message +=
-            ' The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS\n';
+        emergencyMessage +=
+            'EMERGENCY: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS\n';
       }
       if (weatherData['visibility'] < 100) {
-        print('visibility emergency');
         notify = true;
-        message +=
-            ' The visibility is about ${(weatherData['visibility'] / 1609).floor()}mi - USE CAUTION WHEN DRIVING\n';
+        emergencyMessage +=
+            'EMERGENCY: The visibility is about ${(weatherData['visibility'] / 1609).floor()}mi - USE CAUTION WHEN DRIVING\n';
       }
-      if (weatherData['wind']['speed'] > 44.704 || true) {
+      if (weatherData['wind']['speed'] > 44.704) {
         notify = true;
-        message +=
-            ' wind gusts are at ${(weatherData['wind']['speed'] * 2.23694).floor()} mph\n';
+        emergencyMessage +=
+            'EMERGENCY: wind speeds are at ${(weatherData['wind']['speed'] * 2.23694).floor()} mph\n';
       }
     }
+    message += emergencyMessage;
     return notify;
   }
 
   @override
-  checkAlert() async {
-    await fetchData();
+  bool checkAlert(var weatherData, Map<String, double?> userSettings) {
+    String alertMessage = '';
     if (weatherData != null) {
-      if (userSettings['temperature']!) {
-        notify = true;
-        message += 'return true and apped message temp\n';
+      if (userSettings['minTemperature'] != null) {
+        if (userSettings['minTemperature']! >=
+            (weatherData['main']['temp']) * (9 / 5) + 32) {
+          notify = true;
+          alertMessage +=
+              'ALERT: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F\n';
+        }
       }
-      if (userSettings['visibility']!) {
-        notify = true;
-        message += 'return true and apped message visibility\n';
+      if (userSettings['maxTemperature'] != null) {
+        if (userSettings['maxTemperature']! <=
+            (weatherData['main']['temp']) * (9 / 5) + 32) {
+          notify = true;
+          alertMessage +=
+              'ALERT: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F\n';
+        }
       }
-      if (userSettings['wind']!) {
-        notify = true;
-        message += 'return true and apped message wind\n';
+      if (userSettings['visibility'] != null) {
+        if (userSettings['visibility']! >= (weatherData['visibility'] / 1609)) {
+          notify = true;
+          alertMessage +=
+              'ALERT: The visibility is about ${(weatherData['visibility'] / 1609).floor()}mi\n';
+        }
+      }
+      if (userSettings['wind'] != null) {
+        if (userSettings['wind']! <= weatherData['wind']['speed']) {
+          notify = true;
+          alertMessage +=
+              'ALERT: wind speeds are at ${(weatherData['wind']['speed'] * 2.23694).floor()} mph\n';
+        }
       }
     }
+    message += alertMessage;
     return notify;
   }
 }
