@@ -1,3 +1,4 @@
+import 'package:climate/app/services/TemperatureConverter.dart';
 import 'package:climate/app/services/timeUtils.dart';
 import 'package:climate/app/services/weather.dart';
 import 'package:climate/app/utilities/constants.dart';
@@ -6,8 +7,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WeatherTinyInfo extends StatefulWidget {
   final dynamic weatherData;
+  final Function navToMoreDataScreen;
 
-  WeatherTinyInfo({required this.weatherData});
+  WeatherTinyInfo(
+      {required this.weatherData, required this.navToMoreDataScreen});
 
   @override
   State<WeatherTinyInfo> createState() => _WeatherTinyInfoState();
@@ -47,29 +50,33 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
                 ),
               ],
             ),
-            TextButton(
-                onPressed: null,
-                child: Center(
-                  child: Text('More Data'),
-                ),
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: KThemeBorderRadius.borderRadius_xs,
-                      side: BorderSide(color: KThemeColors.text_dimWhite),
-                    ),
+            ElevatedButton(
+              onPressed: () => widget.navToMoreDataScreen(),
+              child: Center(
+                child: Text('More Data'),
+              ),
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: KThemeBorderRadius.borderRadius_xs,
+                    side: BorderSide(color: KThemeColors.text_dimWhite),
                   ),
-                  backgroundColor:
-                      MaterialStatePropertyAll<Color>(KThemeColors.bg_darkBlue),
-                  foregroundColor: MaterialStatePropertyAll<Color>(
-                      KThemeColors.text_dimWhite),
-                  padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
-                      EdgeInsets.fromLTRB(30, 18, 30, 18)),
-                ))
+                ),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(KThemeColors.bg_darkBlue),
+                foregroundColor: MaterialStateProperty.all<Color>(
+                    KThemeColors.text_dimWhite),
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                  EdgeInsets.fromLTRB(30, 18, 30, 18),
+                ),
+              ),
+            )
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text(
-              weatherData != null ? "${weatherData['main']['temp']}°K" : '-',
+              weatherData != null
+                  ? "${TemperatureConverter.kelvinToCelsius(weatherData['main']['temp'])}°C"
+                  : '-',
               style: TextStyle(fontSize: 60.0, fontWeight: FontWeight.w400),
             ),
           ]),
