@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-
-import 'weather.dart';
-
 abstract class CheckNotification {
   bool checkEmergency(var weatherData);
   bool checkAlert(var weatherData, Map<String, double?> userSettings);
