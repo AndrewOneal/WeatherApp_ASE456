@@ -1,3 +1,4 @@
+import 'package:climate/app/services/checkNotification.dart';
 import 'package:climate/app/services/weather.dart';
 import 'package:climate/app/ui/screens/mock/page1.dart';
 import 'package:climate/app/ui/screens/mock/page2.dart';
@@ -9,7 +10,6 @@ import 'package:climate/app/ui/widgets/weather_tiny_info.dart';
 import 'package:climate/app/utilities/constants.dart';
 import 'package:climate/app/utilities/custom_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,11 +38,34 @@ class _MyHomePageState extends State<MyHomePage> {
   String searchParam = '';
   var weatherData;
   var pastWeatherData;
+  Map<String, double?> settings = {};
+  CheckLocation location = CheckLocation();
 
   @override
   void initState() {
     super.initState();
     _init_weatherData();
+  }
+
+  void showNotification() {
+    final actions = [
+      TextButton(
+        onPressed: () {
+          ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+        },
+        child: const Text('OK'),
+      )
+    ];
+
+    ScaffoldMessenger.of(context).showMaterialBanner(
+      MaterialBanner(
+        content: Text(
+          '${location.message}',
+          style: TextStyle(color: Colors.red),
+        ),
+        actions: actions,
+      ),
+    );
   }
 
   void _init_weatherData() async {
@@ -65,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         isLoading = false;
       });
+      checkLocationEmergency();
     }
   }
 
@@ -128,11 +152,31 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void navigateToPage2() {
-    Navigator.push(
+  void navigateToPage2() async {
+    final results = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Page2()),
+      MaterialPageRoute(
+        builder: (context) => Page2(
+          userSettings: settings,
+        ),
+      ),
     );
+    setState(() {
+      this.settings['minTemperature'] = results['minTemperature'];
+      this.settings['maxTemperature'] = results['maxTemperature'];
+      this.settings['visibility'] = results['visibility'];
+      this.settings['wind'] = results['wind'];
+    });
+    checkLocationEmergency();
+  }
+
+  void checkLocationEmergency() {
+    location.message = '';
+    bool emergency = location.checkEmergency(weatherData);
+    bool alert = location.checkAlert(weatherData, settings);
+    if (emergency || alert) {
+      showNotification();
+    }
   }
 
   @override
@@ -230,11 +274,15 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               SizedBox(height: KMainFlexGap),
                               Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Expanded(
-                                    child: WeatherDescription(
-                                        weatherData: weatherData),
+                                    child: BoxWidget(
+                                      color: Colors.orange,
+                                      border: KThemeBorders.border_md,
+                                      borderRadius:
+                                          KThemeBorderRadius.borderRadius_md,
+                                      height: 300,
+                                    ),
                                   ),
                                   SizedBox(width: KMainFlexGap),
                                   Expanded(

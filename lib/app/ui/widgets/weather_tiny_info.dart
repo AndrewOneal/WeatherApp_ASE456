@@ -1,7 +1,8 @@
+import 'package:climate/app/services/timeUtils.dart';
+import 'package:climate/app/services/weather.dart';
 import 'package:climate/app/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 
 class WeatherTinyInfo extends StatefulWidget {
   final dynamic weatherData;
@@ -16,82 +17,8 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
   @override
   Widget build(BuildContext context) {
     dynamic weatherData = widget.weatherData;
-
-    String convertTimestampToTime(int timestamp) {
-      var dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
-      var formattedTime =
-          '${dateTime.hour}:${dateTime.minute}${dateTime.hour >= 12 ? 'pm' : 'am'}';
-      return formattedTime;
-    }
-
-    String _getCurrentTime() {
-      var now = DateTime.now();
-      var formattedTime = DateFormat('EEEE d · h:mm a').format(now);
-      return formattedTime;
-    }
-
-    Image getWeatherIcon(int id) {
-      // Group 2xx: Thunderstorm
-      if (id >= 200 && id <= 232) {
-        return Image.asset(
-          KCustomImages.cloud_thunder,
-          width: 70,
-          fit: BoxFit.cover,
-        );
-      }
-      // Group 3xx: Drizzle
-      else if (id >= 300 && id <= 321) {
-        return Image.asset(
-          KCustomImages.cloud_diagonalRain,
-          width: 70,
-          fit: BoxFit.cover,
-        );
-      }
-      // Group 5xx: Rain
-      else if (id >= 500 && id <= 531) {
-        return Image.asset(
-          KCustomImages.cloud_rain,
-          width: 70,
-          fit: BoxFit.cover,
-        );
-      }
-      // Group 6xx: snow
-      else if (id >= 600 && id <= 631) {
-        return Image.asset(
-          KCustomImages.cloud_snow,
-          width: 70,
-          fit: BoxFit.cover,
-        );
-      }
-      // Group 7xx: atmosphere
-      else if (id >= 700 && id <= 781) {
-        return Image.asset(
-          KCustomImages.cloud_wind,
-          width: 70,
-          fit: BoxFit.cover,
-        );
-      }
-      // Group 8xx: clear/cloud
-      else if (id >= 800 && id <= 804) {
-        return id == 800
-            ? Image.asset(
-                KCustomImages.sun_normal,
-                width: 70,
-                fit: BoxFit.cover,
-              )
-            : Image.asset(
-                KCustomImages.cloud,
-                width: 70,
-                fit: BoxFit.cover,
-              );
-      }
-      // Default icon for unknown weather
-      return Image.asset(
-        KCustomImages.cloud_rain,
-        width: 70,
-        fit: BoxFit.cover,
-      );
-    }
+    final TimeUtils timeUtils = TimeUtils();
+    final WeatherModel weatherModel = WeatherModel();
 
     return Container(
       padding: weatherData == null
@@ -106,7 +33,8 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
             Row(
               children: [
                 weatherData != null
-                    ? getWeatherIcon(weatherData['weather'][0]['id'])
+                    ? weatherModel
+                        .getWeatherImage(weatherData['weather'][0]['id'])
                     : FaIcon(
                         FontAwesomeIcons.ban,
                         color: Colors.lightBlueAccent,
@@ -175,7 +103,7 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
                     width: 10,
                   ),
                   Text(
-                    _getCurrentTime(),
+                    timeUtils.getCurrentTime(),
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.normal,

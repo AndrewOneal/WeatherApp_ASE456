@@ -1,3 +1,4 @@
+import 'package:climate/app/services/timeUtils.dart';
 import 'package:climate/app/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,13 +17,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
   Widget build(BuildContext context) {
     double thisWidth = (MediaQuery.of(context).size.width * .685);
     dynamic weatherData = widget.weatherData;
-
-    String convertTimestampToTime(int timestamp) {
-      var dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
-      var formattedTime =
-          '${dateTime.hour}:${dateTime.minute}${dateTime.hour >= 12 ? 'pm' : 'am'}';
-      return formattedTime;
-    }
+    final TimeUtils timeUtils = TimeUtils();
 
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth <= 600;
@@ -31,7 +26,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
           ? EdgeInsets.fromLTRB(10, 15, 10, 0)
           : EdgeInsets.fromLTRB(10, 0, 10, 10),
       width: double.infinity,
-      height: isMobile ? 950 : 450,
+      height: isMobile ? 1220 : 450,
       decoration: BoxDecoration(
         border: KThemeBorders.border_md,
         color: KThemeColors.bg_lightBlue,
@@ -55,7 +50,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                           height: 40,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +79,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                 ),
                                 Text(
                                   weatherData != null
-                                      ? convertTimestampToTime(
+                                      ? timeUtils.convertTimestampToTime(
                                           weatherData['sys']['sunrise'])
                                       : '-',
                                   style: TextStyle(
@@ -105,7 +100,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                   children: [
                                     FaIcon(
                                       FontAwesomeIcons.solidMoon,
-                                      color: Colors.indigo,
+                                      color: KThemeColors.theme_blue,
                                       size: 20,
                                     ),
                                     SizedBox(
@@ -123,8 +118,108 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                 ),
                                 Text(
                                   weatherData != null
-                                      ? convertTimestampToTime(
-                                          weatherData['sys']['sunrise'])
+                                      ? timeUtils.convertTimestampToTime(
+                                          weatherData['sys']['sunset'])
+                                      : '-',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.normal),
+                                )
+                              ],
+                            )
+                          ],
+                        )
+                      ]),
+                  decoration: BoxDecoration(
+                    color: KThemeColors.bg_darkBlue,
+                    borderRadius: KThemeBorderRadius.borderRadius_md,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Min & Max Temp',
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.normal),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.minus,
+                                      color: Colors.orange,
+                                      size: 20,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      'Min',
+                                      style: TextStyle(
+                                          color: Colors.white38, fontSize: 15),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  weatherData != null
+                                      ? "${weatherData['main']['temp_min']}°K"
+                                      : '-',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.normal),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.plus,
+                                      color: KThemeColors.theme_blue,
+                                      size: 20,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      'Max',
+                                      style: TextStyle(
+                                          color: Colors.white38, fontSize: 15),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  weatherData != null
+                                      ? "${weatherData['main']['temp_max']}°K"
                                       : '-',
                                   style: TextStyle(
                                       fontSize: 30,
@@ -455,7 +550,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                     ),
                                     Text(
                                       weatherData != null
-                                          ? convertTimestampToTime(
+                                          ? timeUtils.convertTimestampToTime(
                                               weatherData['sys']['sunrise'])
                                           : '-',
                                       style: TextStyle(
@@ -478,7 +573,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                       children: [
                                         FaIcon(
                                           FontAwesomeIcons.solidMoon,
-                                          color: Colors.indigo,
+                                          color: KThemeColors.theme_blue,
                                           size: 20,
                                         ),
                                         SizedBox(
@@ -497,8 +592,8 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                     ),
                                     Text(
                                       weatherData != null
-                                          ? convertTimestampToTime(
-                                              weatherData['sys']['sunrise'])
+                                          ? timeUtils.convertTimestampToTime(
+                                              weatherData['sys']['sunset'])
                                           : '-',
                                       style: TextStyle(
                                           fontSize: 40,
@@ -519,12 +614,108 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                       width: 20,
                     ),
                     Container(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Min & Max Temp',
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.normal),
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        FaIcon(
+                                          FontAwesomeIcons.minus,
+                                          color: Colors.orange,
+                                          size: 20,
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          'Min',
+                                          style: TextStyle(
+                                              color: Colors.white38,
+                                              fontSize: 15),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      weatherData != null
+                                          ? "${weatherData['main']['temp_min']}°K"
+                                          : '-',
+                                      style: TextStyle(
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.normal),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 100,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        FaIcon(
+                                          FontAwesomeIcons.plus,
+                                          color: KThemeColors.theme_blue,
+                                          size: 20,
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          'Max',
+                                          style: TextStyle(
+                                              color: Colors.white38,
+                                              fontSize: 15),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      weatherData != null
+                                          ? "${weatherData['main']['temp_max']}°K"
+                                          : '-',
+                                      style: TextStyle(
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.normal),
+                                    )
+                                  ],
+                                )
+                              ],
+                            )
+                          ]),
                       decoration: BoxDecoration(
                         color: KThemeColors.bg_darkBlue,
                         borderRadius: KThemeBorderRadius.borderRadius_md,
                       ),
                       width: (thisWidth - 40) * 0.495,
-                      height: 200,
                     ),
                   ],
                 ),
