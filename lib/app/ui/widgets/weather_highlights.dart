@@ -1,3 +1,4 @@
+import 'package:climate/app/services/TemperatureConverter.dart';
 import 'package:climate/app/services/timeUtils.dart';
 import 'package:climate/app/utilities/constants.dart';
 import 'package:flutter/material.dart';
@@ -181,7 +182,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                 ),
                                 Text(
                                   weatherData != null
-                                      ? "${weatherData['main']['temp_min']}°K"
+                                      ? "${TemperatureConverter.kelvinToCelsius(weatherData['main']['temp_min'])}°C"
                                       : '-',
                                   style: TextStyle(
                                       fontSize: 30,
@@ -219,7 +220,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                 ),
                                 Text(
                                   weatherData != null
-                                      ? "${weatherData['main']['temp_max']}°K"
+                                      ? "${TemperatureConverter.kelvinToCelsius(weatherData['main']['temp_max'])}°C"
                                       : '-',
                                   style: TextStyle(
                                       fontSize: 30,
@@ -484,8 +485,8 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                           ),
                           Text(
                             weatherData == null
-                                ? '-°K'
-                                : "${weatherData['main']['feels_like']}°K",
+                                ? '-'
+                                : "${TemperatureConverter.kelvinToCelsius(weatherData['main']['feels_like'])}°C",
                             style: TextStyle(
                                 fontSize: 40,
                                 color: KThemeColors.text_dimWhite,
@@ -659,7 +660,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                     ),
                                     Text(
                                       weatherData != null
-                                          ? "${weatherData['main']['temp_min']}°K"
+                                          ? "${TemperatureConverter.kelvinToCelsius(weatherData['main']['temp_min'])}°C"
                                           : '-',
                                       style: TextStyle(
                                           fontSize: 40,
@@ -700,7 +701,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                     ),
                                     Text(
                                       weatherData != null
-                                          ? "${weatherData['main']['temp_max']}°K"
+                                          ? "${TemperatureConverter.kelvinToCelsius(weatherData['main']['temp_max'])}°C"
                                           : '-',
                                       style: TextStyle(
                                           fontSize: 40,
@@ -837,8 +838,8 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                               ),
                               Text(
                                 weatherData == null
-                                    ? '-°K'
-                                    : "${weatherData['main']['feels_like']}°K",
+                                    ? '-'
+                                    : "${TemperatureConverter.kelvinToCelsius(weatherData['main']['feels_like'])}°C",
                                 style: TextStyle(
                                     fontSize: 40,
                                     color: KThemeColors.text_dimWhite,

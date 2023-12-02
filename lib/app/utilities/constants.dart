@@ -44,6 +44,10 @@ class KThemeColors {
   static final Color text_dimWhite = Color(0xFFFFFFFF).withOpacity(0.75);
   static const Color text_whiteWhite = Color(0xFFFFFFFF);
   static const Color theme_blue = Color(0xFF19ABBF);
+
+  static const Color pinkish = Color(0xFFff416a);
+  static const Color yellowish = Color(0xFFfebc11);
+  static const Color purplish = Color(0xFF6947ef);
 }
 
 class KThemeBorders {

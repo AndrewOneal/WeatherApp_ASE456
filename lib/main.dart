@@ -2,8 +2,9 @@ import 'package:climate/app/services/checkNotification.dart';
 import 'package:climate/app/services/weather.dart';
 import 'package:climate/app/ui/screens/mock/page1.dart';
 import 'package:climate/app/ui/screens/mock/page2.dart';
+import 'package:climate/app/ui/screens/more_data.dart';
 import 'package:climate/app/ui/widgets/box_widget.dart';
-import 'package:climate/app/ui/widgets/top.dart';
+import 'package:climate/app/ui/widgets/top/top.dart';
 import 'package:climate/app/ui/widgets/weather_description.dart';
 import 'package:climate/app/ui/widgets/weather_highlights.dart';
 import 'package:climate/app/ui/widgets/weather_tiny_info.dart';
@@ -36,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool isLoading = true;
   String searchParam = '';
+  String currentTemp = 'Celsius';
   var weatherData;
   var pastWeatherData;
   Map<String, double?> settings = {};
@@ -45,6 +47,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _init_weatherData();
+  }
+
+  void updateCurrentTemp(String newTemp) {
+    setState(() {
+      currentTemp = newTemp;
+    });
+  }
+
+  void showMaterialBanner() {
+    showNotification();
   }
 
   void showNotification() {
@@ -148,6 +160,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ToastManager.showSuccess(
             'Weather data retrieved successfully',
           );
+          print(weatherData);
+          print(weatherData.runtimeType);
           // print(weatherData);
         }
       } else {
@@ -169,6 +183,16 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => Page1()),
+    );
+  }
+
+  void navToMoreDataScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => MoreData(
+                weatherData: weatherData,
+              )),
     );
   }
 
@@ -208,8 +232,9 @@ class _MyHomePageState extends State<MyHomePage> {
         preferredSize: Size.fromHeight(200.0),
         child: Top(
           onSearch: onSearch,
-          getLocationWeather: getLocationWeather,
-          onNavigateToPage2: navigateToPage2,
+          onNavigateToPage1: navigateToPage1,
+          currentTemp: currentTemp,
+          updateTempCallback: updateCurrentTemp,
         ),
       ),
       body: SingleChildScrollView(
@@ -224,8 +249,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           IntrinsicHeight(
                             child: WeatherTinyInfo(
-                              weatherData: weatherData,
-                            ),
+                                weatherData: weatherData,
+                                navToMoreDataScreen: navToMoreDataScreen),
                           ),
                           SizedBox(height: KMainFlexGap),
                           IntrinsicHeight(
@@ -265,6 +290,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               IntrinsicHeight(
                                 child: WeatherTinyInfo(
                                   weatherData: weatherData,
+                                  navToMoreDataScreen: navToMoreDataScreen,
                                 ),
                               ),
                               SizedBox(height: KMainFlexGap),
