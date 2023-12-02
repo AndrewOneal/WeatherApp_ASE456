@@ -1,3 +1,9 @@
-2023/12/01-21:48:30.875 1afc Reusing MANIFEST C:\Users\admasul1\AppData\Local\Temp\flutter_tools.90f9227f\flutter_tools_chrome_device.a1912ae9\Default\Extension State/MANIFEST-000001
-2023/12/01-21:48:30.876 1afc Recovering log #3
-2023/12/01-21:48:30.876 1afc Reusing old log C:\Users\admasul1\AppData\Local\Temp\flutter_tools.90f9227f\flutter_tools_chrome_device.a1912ae9\Default\Extension State/000003.log 
+<<<<<<< HEAD
+2023/12/02-00:46:30.941 4cec Reusing MANIFEST C:\Users\admasul1\AppData\Local\Temp\flutter_tools.cc75b619\flutter_tools_chrome_device.26823a21\Default\Extension State/MANIFEST-000001
+2023/12/02-00:46:30.941 4cec Recovering log #3
+2023/12/02-00:46:30.942 4cec Reusing old log C:\Users\admasul1\AppData\Local\Temp\flutter_tools.cc75b619\flutter_tools_chrome_device.26823a21\Default\Extension State/000003.log 
+=======
+2023/12/01-20:23:19.659 3f4c Reusing MANIFEST C:\Users\dreyo\AppData\Local\Temp\flutter_tools.317a29ef\flutter_tools_chrome_device.3c203500\Default\Extension State/MANIFEST-000001
+2023/12/01-20:23:19.660 3f4c Recovering log #3
+2023/12/01-20:23:19.661 3f4c Reusing old log C:\Users\dreyo\AppData\Local\Temp\flutter_tools.317a29ef\flutter_tools_chrome_device.3c203500\Default\Extension State/000003.log 
+>>>>>>> 1f710a7238932148c57f0e8273372c651658b628

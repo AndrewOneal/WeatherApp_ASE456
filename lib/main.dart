@@ -1,9 +1,11 @@
 import 'package:climate/app/services/checkNotification.dart';
 import 'package:climate/app/services/weather.dart';
 import 'package:climate/app/ui/screens/mock/page1.dart';
+import 'package:climate/app/ui/screens/mock/page2.dart';
 import 'package:climate/app/ui/screens/more_data.dart';
 import 'package:climate/app/ui/widgets/box_widget.dart';
 import 'package:climate/app/ui/widgets/top/top.dart';
+import 'package:climate/app/ui/widgets/weather_description.dart';
 import 'package:climate/app/ui/widgets/weather_highlights.dart';
 import 'package:climate/app/ui/widgets/weather_tiny_info.dart';
 import 'package:climate/app/utilities/constants.dart';
@@ -38,18 +40,13 @@ class _MyHomePageState extends State<MyHomePage> {
   String currentTemp = 'Celsius';
   var weatherData;
   var pastWeatherData;
+  Map<String, double?> settings = {};
   CheckLocation location = CheckLocation();
 
   @override
   void initState() {
     super.initState();
     _init_weatherData();
-
-    Future.delayed(Duration.zero, () async {
-      if (await checkLocationEmergency()) {
-        showMaterialBanner();
-      }
-    });
   }
 
   void updateCurrentTemp(String newTemp) {
@@ -59,6 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void showMaterialBanner() {
+    showNotification();
+  }
+
+  void showNotification() {
     final actions = [
       TextButton(
         onPressed: () {
@@ -71,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ScaffoldMessenger.of(context).showMaterialBanner(
       MaterialBanner(
         content: Text(
-          'EMERGENCY! ${this.location.message}',
+          '${location.message}',
           style: TextStyle(color: Colors.red),
         ),
         actions: actions,
@@ -99,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         isLoading = false;
       });
+      checkLocationEmergency();
     }
   }
 
@@ -111,6 +113,26 @@ class _MyHomePageState extends State<MyHomePage> {
         isLoading = false;
       });
     });
+  }
+
+  void getLocationWeather() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      weatherData = await weatherModel.getLocationWeather();
+      ToastManager.showSuccess(
+        'Weather data retrieved successfully',
+      );
+    } catch (e) {
+      ToastManager.showError('Error fetching weather data');
+      print('Error: $e');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   void onSearch(String searchText) {
@@ -174,8 +196,31 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<bool> checkLocationEmergency() async {
-    return await this.location.checkEmergency();
+  void navigateToPage2() async {
+    final results = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Page2(
+          userSettings: settings,
+        ),
+      ),
+    );
+    setState(() {
+      this.settings['minTemperature'] = results['minTemperature'];
+      this.settings['maxTemperature'] = results['maxTemperature'];
+      this.settings['visibility'] = results['visibility'];
+      this.settings['wind'] = results['wind'];
+    });
+    checkLocationEmergency();
+  }
+
+  void checkLocationEmergency() {
+    location.message = '';
+    bool emergency = location.checkEmergency(weatherData);
+    bool alert = location.checkAlert(weatherData, settings);
+    if (emergency || alert) {
+      showNotification();
+    }
   }
 
   @override
@@ -220,11 +265,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                           SizedBox(height: KMainFlexGap),
-                          BoxWidget(
-                            color: Colors.orange,
-                            border: KThemeBorders.border_md,
-                            borderRadius: KThemeBorderRadius.borderRadius_md,
-                            height: 300,
+                          IntrinsicHeight(
+                            child: WeatherDescription(
+                              weatherData: weatherData,
+                            ),
                           ),
                           SizedBox(height: KMainFlexGap),
                           BoxWidget(
@@ -275,14 +319,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               SizedBox(height: KMainFlexGap),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Expanded(
-                                    child: BoxWidget(
-                                      color: Colors.orange,
-                                      border: KThemeBorders.border_md,
-                                      borderRadius:
-                                          KThemeBorderRadius.borderRadius_md,
-                                      height: 300,
+                                    child: WeatherDescription(
+                                      weatherData: weatherData,
                                     ),
                                   ),
                                   SizedBox(width: KMainFlexGap),
@@ -299,12 +340,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               SizedBox(height: KMainFlexGap),
                               IntrinsicHeight(
-                                child: BoxWidget(
-                                  color: Colors.yellow,
-                                  border: KThemeBorders.border_md,
-                                  borderRadius:
-                                      KThemeBorderRadius.borderRadius_md,
-                                  height: 300,
+                                child: WeatherDescription(
+                                  weatherData: weatherData,
                                 ),
                               ),
                             ],

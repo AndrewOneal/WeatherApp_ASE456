@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'location.dart';
 import 'networking.dart';
 
-const apiKey = 'c8816ba7bf255bcb06664ac735cac0ec';
+const apiKey = '994a61464f8f26f4b546d4f21f21b989';
 const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
 
 //https://api.openweathermap.org/data/2.5/weather';
