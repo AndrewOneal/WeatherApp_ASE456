@@ -1,0 +1,104 @@
+{"header" : {
+  "cloc_url"           : "github.com/AlDanial/cloc",
+  "cloc_version"       : "1.98",
+  "elapsed_seconds"    : 1.38935112953186,
+  "n_files"            : 291,
+  "n_lines"            : 18493,
+  "files_per_second"   : 209.450292164841,
+  "lines_per_second"   : 13310.5300790529,
+  "report_file"        : "progress/AO/2023-12-01.json"},
+"JSON" :{
+  "nFiles": 108,
+  "blank": 0,
+  "comment": 0,
+  "code": 10421},
+"XML" :{
+  "nFiles": 110,
+  "blank": 208,
+  "comment": 67,
+  "code": 2443},
+"Dart" :{
+  "nFiles": 23,
+  "blank": 139,
+  "comment": 40,
+  "code": 2381},
+"Text" :{
+  "nFiles": 17,
+  "blank": 0,
+  "comment": 0,
+  "code": 1887},
+"GLSL" :{
+  "nFiles": 1,
+  "blank": 0,
+  "comment": 0,
+  "code": 160},
+"Bourne Again Shell" :{
+  "nFiles": 1,
+  "blank": 19,
+  "comment": 20,
+  "code": 121},
+"Gradle" :{
+  "nFiles": 3,
+  "blank": 19,
+  "comment": 5,
+  "code": 94},
+"Markdown" :{
+  "nFiles": 3,
+  "blank": 39,
+  "comment": 0,
+  "code": 82},
+"DOS Batch" :{
+  "nFiles": 1,
+  "blank": 24,
+  "comment": 2,
+  "code": 64},
+"Java" :{
+  "nFiles": 4,
+  "blank": 6,
+  "comment": 14,
+  "code": 41},
+"HTML" :{
+  "nFiles": 1,
+  "blank": 8,
+  "comment": 13,
+  "code": 38},
+"YAML" :{
+  "nFiles": 2,
+  "blank": 10,
+  "comment": 22,
+  "code": 31},
+"Properties" :{
+  "nFiles": 9,
+  "blank": 0,
+  "comment": 4,
+  "code": 30},
+"Kotlin" :{
+  "nFiles": 1,
+  "blank": 2,
+  "comment": 0,
+  "code": 4},
+"SQL" :{
+  "nFiles": 2,
+  "blank": 0,
+  "comment": 0,
+  "code": 4},
+"D" :{
+  "nFiles": 3,
+  "blank": 0,
+  "comment": 0,
+  "code": 3},
+"CSS" :{
+  "nFiles": 1,
+  "blank": 0,
+  "comment": 13,
+  "code": 1},
+"JavaScript" :{
+  "nFiles": 1,
+  "blank": 0,
+  "comment": 13,
+  "code": 1},
+"SUM": {
+  "blank": 474,
+  "comment": 213,
+  "code": 17806,
+  "nFiles": 291} }

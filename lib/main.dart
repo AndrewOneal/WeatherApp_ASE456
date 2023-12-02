@@ -4,6 +4,7 @@ import 'package:climate/app/ui/screens/mock/page1.dart';
 import 'package:climate/app/ui/screens/mock/page2.dart';
 import 'package:climate/app/ui/widgets/box_widget.dart';
 import 'package:climate/app/ui/widgets/top.dart';
+import 'package:climate/app/ui/widgets/weather_description.dart';
 import 'package:climate/app/ui/widgets/weather_highlights.dart';
 import 'package:climate/app/ui/widgets/weather_tiny_info.dart';
 import 'package:climate/app/utilities/constants.dart';
@@ -102,6 +103,26 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void getLocationWeather() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      weatherData = await weatherModel.getLocationWeather();
+      ToastManager.showSuccess(
+        'Weather data retrieved successfully',
+      );
+    } catch (e) {
+      ToastManager.showError('Error fetching weather data');
+      print('Error: $e');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   void onSearch(String searchText) {
     setState(() {
       searchParam = searchText;
@@ -127,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ToastManager.showSuccess(
             'Weather data retrieved successfully',
           );
+          // print(weatherData);
         }
       } else {
         weatherData = await weatherModel.getLocationWeather();
@@ -186,7 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
         preferredSize: Size.fromHeight(200.0),
         child: Top(
           onSearch: onSearch,
-          onNavigateToPage1: navigateToPage1,
+          getLocationWeather: getLocationWeather,
           onNavigateToPage2: navigateToPage2,
         ),
       ),
@@ -218,11 +240,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                           SizedBox(height: KMainFlexGap),
-                          BoxWidget(
-                            color: Colors.orange,
-                            border: KThemeBorders.border_md,
-                            borderRadius: KThemeBorderRadius.borderRadius_md,
-                            height: 300,
+                          IntrinsicHeight(
+                            child: WeatherDescription(
+                              weatherData: weatherData,
+                            ),
                           ),
                           SizedBox(height: KMainFlexGap),
                           BoxWidget(
@@ -272,14 +293,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               SizedBox(height: KMainFlexGap),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Expanded(
-                                    child: BoxWidget(
-                                      color: Colors.orange,
-                                      border: KThemeBorders.border_md,
-                                      borderRadius:
-                                          KThemeBorderRadius.borderRadius_md,
-                                      height: 300,
+                                    child: WeatherDescription(
+                                      weatherData: weatherData,
                                     ),
                                   ),
                                   SizedBox(width: KMainFlexGap),
@@ -296,12 +314,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               SizedBox(height: KMainFlexGap),
                               IntrinsicHeight(
-                                child: BoxWidget(
-                                  color: Colors.yellow,
-                                  border: KThemeBorders.border_md,
-                                  borderRadius:
-                                      KThemeBorderRadius.borderRadius_md,
-                                  height: 300,
+                                child: WeatherDescription(
+                                  weatherData: weatherData,
                                 ),
                               ),
                             ],

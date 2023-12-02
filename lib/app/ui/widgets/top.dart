@@ -5,14 +5,14 @@ import 'package:flutter/rendering.dart';
 
 class Top extends StatelessWidget {
   final Function onSearch;
-  final Function onNavigateToPage1;
+  final Function getLocationWeather;
   final Function onNavigateToPage2;
 
   final TextEditingController _searchController = TextEditingController();
 
   Top({
     required this.onSearch,
-    required this.onNavigateToPage1,
+    required this.getLocationWeather,
     required this.onNavigateToPage2,
   });
 
@@ -37,7 +37,7 @@ class Top extends StatelessWidget {
                     SearchBar(
                         controller: _searchController, onSearch: onSearch),
                     ButtonContainer(
-                        onNavigateToPage1: onNavigateToPage1,
+                        getLocationWeather: getLocationWeather,
                         onNavigateToPage2: onNavigateToPage2)
                   ],
                 ),
@@ -47,7 +47,7 @@ class Top extends StatelessWidget {
               Logo(),
               SearchBar(controller: _searchController, onSearch: onSearch),
               ButtonContainer(
-                onNavigateToPage1: onNavigateToPage1,
+                getLocationWeather: getLocationWeather,
                 onNavigateToPage2: onNavigateToPage2,
               )
             ]),
@@ -172,11 +172,11 @@ class SearchBar extends StatelessWidget {
 }
 
 class ButtonContainer extends StatelessWidget {
-  final Function onNavigateToPage1;
+  final Function getLocationWeather;
   final Function onNavigateToPage2;
 
   ButtonContainer({
-    required this.onNavigateToPage1,
+    required this.getLocationWeather,
     required this.onNavigateToPage2,
   });
 
@@ -192,7 +192,7 @@ class ButtonContainer extends StatelessWidget {
           Icons.location_on,
           KThemeColors.theme_blue,
           () {
-            onNavigateToPage1();
+            getLocationWeather();
           },
         ),
         SizedBox(width: isMobile ? 10 : 16.0),
