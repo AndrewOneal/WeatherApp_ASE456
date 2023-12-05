@@ -8,6 +8,7 @@ import 'package:climate/app/ui/widgets/top/top.dart';
 import 'package:climate/app/ui/widgets/weather_description.dart';
 import 'package:climate/app/ui/widgets/weather_highlights.dart';
 import 'package:climate/app/ui/widgets/weather_tiny_info.dart';
+import 'package:climate/app/ui/widgets/five_day_forecast.dart';
 import 'package:climate/app/utilities/constants.dart';
 import 'package:climate/app/utilities/custom_toast.dart';
 import 'package:flutter/material.dart';
@@ -297,11 +298,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               SizedBox(height: KMainFlexGap),
                               IntrinsicHeight(
-                                child: BoxWidget(
-                                  color: Colors.blue,
-                                  border: KThemeBorders.border_md,
-                                  borderRadius:
-                                      KThemeBorderRadius.borderRadius_md,
+                                child: FiveDayForecast(
+                                  weatherData: weatherData,
+                                  navToMoreDataScreen: navToMoreDataScreen,
                                 ),
                               ),
                             ],
