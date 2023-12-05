@@ -1,9 +1,7 @@
 import 'package:climate/app/services/checkNotification.dart';
 import 'package:climate/app/services/weather.dart';
-import 'package:climate/app/ui/screens/mock/page1.dart';
 import 'package:climate/app/ui/screens/mock/page2.dart';
 import 'package:climate/app/ui/screens/more_data.dart';
-import 'package:climate/app/ui/widgets/box_widget.dart';
 import 'package:climate/app/ui/widgets/top/top.dart';
 import 'package:climate/app/ui/widgets/weather_description.dart';
 import 'package:climate/app/ui/widgets/weather_highlights.dart';
