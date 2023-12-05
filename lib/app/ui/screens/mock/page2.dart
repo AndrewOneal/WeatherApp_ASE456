@@ -35,6 +35,8 @@ class _Page2State extends State<Page2> {
         text: visibility != null ? visibility.toString() : '');
     windSpeedController =
         TextEditingController(text: wind != null ? wind.toString() : '');
+    temperature =
+        widget.userSettings['temperatureUnit'] == 0 ? 'Celcius' : 'Farenheight';
   }
 
   double? parseDoubleOrNull(String input) {
@@ -109,7 +111,9 @@ class _Page2State extends State<Page2> {
                 items: ['Celcius', 'Farenheight']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
-                      child: Text(value), value: value);
+                    child: Text(value),
+                    value: value,
+                  );
                 }).toList(),
                 onChanged: (value) {
                   setState(() {

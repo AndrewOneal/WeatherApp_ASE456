@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-2023/12/02-00:46:30.914 4e1c Reusing MANIFEST C:\Users\admasul1\AppData\Local\Temp\flutter_tools.cc75b619\flutter_tools_chrome_device.26823a21\Default\Session Storage/MANIFEST-000001
-2023/12/02-00:46:30.916 4e1c Recovering log #4
-2023/12/02-00:46:30.919 4e1c Reusing old log C:\Users\admasul1\AppData\Local\Temp\flutter_tools.cc75b619\flutter_tools_chrome_device.26823a21\Default\Session Storage/000004.log 
-2023/12/02-00:46:30.920 4e1c Delete type=0 #3
-=======
-2023/12/01-20:23:19.573 4dac Reusing MANIFEST C:\Users\dreyo\AppData\Local\Temp\flutter_tools.317a29ef\flutter_tools_chrome_device.3c203500\Default\Session Storage/MANIFEST-000001
-2023/12/01-20:23:19.578 4dac Recovering log #3
-2023/12/01-20:23:19.585 4dac Reusing old log C:\Users\dreyo\AppData\Local\Temp\flutter_tools.317a29ef\flutter_tools_chrome_device.3c203500\Default\Session Storage/000003.log 
-2023/12/01-20:23:19.740 2d98 Level-0 table #5: started
-2023/12/01-20:23:19.750 2d98 Level-0 table #5: 14095 bytes OK
-2023/12/01-20:23:19.756 2d98 Delete type=0 #3
->>>>>>> 1f710a7238932148c57f0e8273372c651658b628
+2023/12/02-01:23:09.597 73bc Reusing MANIFEST C:\Users\admasul1\AppData\Local\Temp\flutter_tools.8817ff74\flutter_tools_chrome_device.ec799295\Default\Session Storage/MANIFEST-000001
+2023/12/02-01:23:09.601 73bc Recovering log #4
+2023/12/02-01:23:09.604 73bc Reusing old log C:\Users\admasul1\AppData\Local\Temp\flutter_tools.8817ff74\flutter_tools_chrome_device.ec799295\Default\Session Storage/000004.log 
+2023/12/02-01:23:09.608 73bc Delete type=0 #3

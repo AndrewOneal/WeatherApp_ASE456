@@ -1,5 +1,7 @@
+import 'TemperatureConverter.dart';
+
 abstract class CheckNotification {
-  bool checkEmergency(var weatherData);
+  bool checkEmergency(var weatherData, Map<String, double?> userSettings);
   bool checkAlert(var weatherData, Map<String, double?> userSettings);
 }
 
@@ -7,17 +9,23 @@ class CheckLocation extends CheckNotification {
   bool notify = false;
   String message = '';
   @override
-  bool checkEmergency(var weatherData) {
+  bool checkEmergency(var weatherData, Map<String, double?> userSettings) {
     String emergencyMessage = '';
+    double? temperatureUnit = userSettings['temperatureUnit'];
+
+    String temp = temperatureUnit == 1
+        ? TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp'])
+        : weatherData['main']['temp'].toString();
+    double temperature = double.parse(temp);
     if (weatherData != null) {
-      if (weatherData['main']['temp'] > 37.78) {
+      if (temperature > 37.78) {
         notify = true;
         emergencyMessage +=
-            'EMERGENCY: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS!\n';
-      } else if (weatherData['main']['temp'] < -15) {
+            'EMERGENCY: The temperature is ${temp} - STAY INDOORS!\n';
+      } else if (temperature < -15) {
         notify = true;
         emergencyMessage +=
-            'EMERGENCY: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F - STAY INDOORS\n';
+            'EMERGENCY: The temperature is ${temp} - STAY INDOORS\n';
       }
       if (weatherData['visibility'] < 100) {
         notify = true;
@@ -38,21 +46,26 @@ class CheckLocation extends CheckNotification {
   bool checkAlert(var weatherData, Map<String, double?> userSettings) {
     double? temperatureUnit = userSettings['temperatureUnit'];
     String alertMessage = '';
+    String temp = temperatureUnit == 1
+        ? TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp'])
+        : weatherData['main']['temp'].toString();
+
+    double temperature = double.parse(temp);
+
+    print('TEMP B4 CONVERT:::::: ${weatherData['main']['temp']}');
+    print('TEMP:::::::: $temp');
+
     if (weatherData != null) {
       if (userSettings['minTemperature'] != null) {
-        if (userSettings['minTemperature']! >=
-            (weatherData['main']['temp']) * (9 / 5) + 32) {
+        if (userSettings['minTemperature']! >= temperature) {
           notify = true;
-          alertMessage +=
-              'ALERT: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F\n';
+          alertMessage += 'ALERT: The temperature is ${temperature}\n';
         }
       }
       if (userSettings['maxTemperature'] != null) {
-        if (userSettings['maxTemperature']! <=
-            (weatherData['main']['temp']) * (9 / 5) + 32) {
+        if (userSettings['maxTemperature']! <= temperature) {
           notify = true;
-          alertMessage +=
-              'ALERT: The temperature is ${(((weatherData['main']['temp']) * (9 / 5)) + 32).floor()}F\n';
+          alertMessage += 'ALERT: The temperature is ${temperature}\n';
         }
       }
       if (userSettings['visibility'] != null) {

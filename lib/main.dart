@@ -217,7 +217,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void checkLocationEmergency() {
     location.message = '';
-    bool emergency = location.checkEmergency(weatherData);
+    bool emergency = location.checkEmergency(weatherData, settings);
     bool alert = location.checkAlert(weatherData, settings);
     if (emergency || alert) {
       showNotification();
