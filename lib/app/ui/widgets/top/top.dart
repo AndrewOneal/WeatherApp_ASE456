@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class Top extends StatelessWidget {
   final Function onSearch;
   final Function onNavigateToPage1;
-  final Function updateTempCallback;
+  //final Function updateTempCallback;
   final Function onNavigateToPage2;
 
   final TextEditingController _searchController = TextEditingController();
@@ -15,7 +15,7 @@ class Top extends StatelessWidget {
   Top(
       {required this.onSearch,
       required this.onNavigateToPage1,
-      required this.updateTempCallback,
+      //required this.updateTempCallback,
       required this.onNavigateToPage2});
 
   @override
