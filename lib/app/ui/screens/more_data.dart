@@ -17,99 +17,106 @@ class _MoreDataState extends State<MoreData> {
     bool isMobile = screenWidth <= 600;
     double width = isMobile ? screenWidth : screenWidth / 3;
 
-    return SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'More Weather Data',
-              style: TextStyle(
-                color: KThemeColors.text_whiteWhite,
-                decoration: TextDecoration.none,
-                fontSize: 45,
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              'For the aficionados we build 🤓',
-              style: TextStyle(
-                color: KThemeColors.theme_blue,
-                fontSize: 20,
-                decoration: TextDecoration.none,
-              ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Container(
-              width: width,
-              child: Table(
-                border: TableBorder.all(
-                  color: KThemeColors.text_dimWhite,
-                  borderRadius: KThemeBorderRadius.borderRadius_sm,
-                ),
-                columnWidths: {
-                  0: FlexColumnWidth(1), // Weather Attribute column
-                  1: FlexColumnWidth(1), // Weather Data column
-                },
-                children: [
-                  buildTableRow(['Weather Attribute', 'Weather Data'],
-                      isHeader: true),
-                  buildTableRow(
-                      ['Lon', "${widget.weatherData['coord']['lon']}"]),
-                  buildTableRow(
-                      ['Lat', "${widget.weatherData['coord']['lat']}"]),
-                  buildTableRow(
-                      ['Lon', "${widget.weatherData['coord']['lon']}"]),
-                  buildTableRow(
-                      ['Temp', "${widget.weatherData['main']['temp']}°K"]),
-                  buildTableRow([
-                    'Min_Temp',
-                    "${widget.weatherData['main']['temp_min']}°K"
-                  ]),
-                  buildTableRow([
-                    'Max_Temp',
-                    "${widget.weatherData['main']['temp_max']}°K"
-                  ]),
-                  buildTableRow([
-                    'Pressure',
-                    "${widget.weatherData['main']['pressure']}pha"
-                  ]),
-                  buildTableRow([
-                    'Humidity',
-                    "${widget.weatherData['main']['humidity']}"
-                  ]),
-                  buildTableRow([
-                    'Sea Level',
-                    "${widget.weatherData['main']['sea_level']}"
-                  ]),
-                  buildTableRow([
-                    'Ground Level',
-                    "${widget.weatherData['main']['grnd_level']}"
-                  ]),
-                  buildTableRow(
-                      ['visibility', "${widget.weatherData['visibility']}"]),
-                  buildTableRow([
-                    'Wind Speed',
-                    "${widget.weatherData['wind']['speed']}m/s"
-                  ]),
-                  buildTableRow(
-                      ['Clouds', "${widget.weatherData['clouds']['all']}"]),
-                  buildTableRow(
-                      ['Country', "${widget.weatherData['sys']['country']}"]),
-                  buildTableRow(['City', "${widget.weatherData['name']}"]),
-                ],
-              ),
-            ),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'More Weather Data',
+          ),
         ),
-        decoration: BoxDecoration(color: KThemeColors.bg_darkBlue),
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'For the aficionados we build 🤓',
+                  style: TextStyle(
+                    color: KThemeColors.theme_blue,
+                    fontSize: 20,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Container(
+                  width: width,
+                  child: Table(
+                    border: TableBorder.all(
+                      color: KThemeColors.text_dimWhite,
+                      borderRadius: KThemeBorderRadius.borderRadius_sm,
+                    ),
+                    columnWidths: {
+                      0: FlexColumnWidth(1), // Weather Attribute column
+                      1: FlexColumnWidth(1), // Weather Data column
+                    },
+                    children: [
+                      buildTableRow(['Weather Attribute', 'Weather Data'],
+                          isHeader: true),
+                      buildTableRow(
+                          ['Lon', "${widget.weatherData['coord']['lon']}"]),
+                      buildTableRow(
+                          ['Lat', "${widget.weatherData['coord']['lat']}"]),
+                      buildTableRow(
+                          ['Lon', "${widget.weatherData['coord']['lon']}"]),
+                      buildTableRow(
+                          ['Temp', "${widget.weatherData['main']['temp']}°K"]),
+                      buildTableRow([
+                        'Min_Temp',
+                        "${widget.weatherData['main']['temp_min']}°K"
+                      ]),
+                      buildTableRow([
+                        'Max_Temp',
+                        "${widget.weatherData['main']['temp_max']}°K"
+                      ]),
+                      buildTableRow([
+                        'Pressure',
+                        "${widget.weatherData['main']['pressure']}pha"
+                      ]),
+                      buildTableRow([
+                        'Humidity',
+                        "${widget.weatherData['main']['humidity']}"
+                      ]),
+                      buildTableRow([
+                        'Sea Level',
+                        "${widget.weatherData['main']['sea_level']}"
+                      ]),
+                      buildTableRow([
+                        'Ground Level',
+                        "${widget.weatherData['main']['grnd_level']}"
+                      ]),
+                      buildTableRow([
+                        'visibility',
+                        "${widget.weatherData['visibility']}"
+                      ]),
+                      buildTableRow([
+                        'Wind Speed',
+                        "${widget.weatherData['wind']['speed']}m/s"
+                      ]),
+                      buildTableRow(
+                          ['Clouds', "${widget.weatherData['clouds']['all']}"]),
+                      buildTableRow([
+                        'Country',
+                        "${widget.weatherData['sys']['country']}"
+                      ]),
+                      buildTableRow(['City', "${widget.weatherData['name']}"]),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            decoration: BoxDecoration(color: KThemeColors.bg_darkBlue),
+          ),
+        ),
       ),
     );
   }
