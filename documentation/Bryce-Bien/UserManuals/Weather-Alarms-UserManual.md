@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Weather Alarms feature allows users to receive customized notifications for specific weather conditions such as temperature extremes, low visibility, or high wind speeds.
+The Weather Alarms feature allows users to receive customized notifications for specific current weather conditions such as temperature extremes, low visibility, or high wind speeds.
 
 ## How to use
 
