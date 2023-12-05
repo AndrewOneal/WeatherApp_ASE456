@@ -185,7 +185,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                   weatherData != null
                                       ? widget.userSettings[
                                                   'temperatureUnit'] ==
-                                              0
+                                              0.0
                                           ? '${weatherData['main']['temp_min']}°C'
                                           : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp_min'])}°F'
                                       : '-',
@@ -225,7 +225,11 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                 ),
                                 Text(
                                   weatherData != null
-                                      ? "${TemperatureConverter.kelvinToCelsius(weatherData['main']['temp_max'])}°C"
+                                      ? widget.userSettings[
+                                                  'temperatureUnit'] ==
+                                              0.0
+                                          ? '${weatherData['main']['temp_max']}°C'
+                                          : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp_max'])}°F'
                                       : '-',
                                   style: TextStyle(
                                       fontSize: 30,
@@ -667,7 +671,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                       weatherData != null
                                           ? widget.userSettings[
                                                       'temperatureUnit'] ==
-                                                  0
+                                                  0.0
                                               ? '${weatherData['main']['temp_min']}°C'
                                               : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp_min'])}°F'
                                           : '-',
@@ -712,7 +716,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                       weatherData != null
                                           ? widget.userSettings[
                                                       'temperatureUnit'] ==
-                                                  0
+                                                  0.0
                                               ? '${weatherData['main']['temp_max']}°C'
                                               : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp_max'])}°F'
                                           : '-',
@@ -852,7 +856,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                               Text(
                                 weatherData != null
                                     ? widget.userSettings['temperatureUnit'] ==
-                                            0
+                                            0.0
                                         ? '${weatherData['main']['feels_like']}°C'
                                         : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['feels_like'])}°F'
                                     : '-',
