@@ -171,19 +171,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void navigateToPage1() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Page1()),
-    );
+    getLocationWeather();
   }
 
   void navToMoreDataScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => MoreData(
-                weatherData: weatherData,
-              )),
+        builder: (context) => MoreData(
+          weatherData: weatherData,
+        ),
+      ),
     );
   }
 
@@ -256,24 +254,17 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           SizedBox(height: KMainFlexGap),
                           IntrinsicHeight(
-                            child: BoxWidget(
-                              color: Colors.blue,
-                              border: KThemeBorders.border_md,
-                              borderRadius: KThemeBorderRadius.borderRadius_md,
-                            ),
-                          ),
-                          SizedBox(height: KMainFlexGap),
-                          IntrinsicHeight(
                             child: WeatherDescription(
                               weatherData: weatherData,
                             ),
                           ),
                           SizedBox(height: KMainFlexGap),
-                          BoxWidget(
-                            color: Colors.purple,
-                            border: KThemeBorders.border_md,
-                            borderRadius: KThemeBorderRadius.borderRadius_md,
-                            height: 300,
+                          Container(
+                            height: 625, // Adjust the height as needed
+                            child: FiveDayForecast(
+                              weatherData: weatherData,
+                              userSettings: settings,
+                            ),
                           ),
                         ],
                       ),
@@ -295,10 +286,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               SizedBox(height: KMainFlexGap),
                               // Wrap FiveDayForecast in a Container with a specified height
                               Container(
-                                height: 500, // Adjust the height as needed
-
-                                child:
-                                    FiveDayForecast(weatherData: weatherData),
+                                height: 625, // Adjust the height as needed
+                                child: FiveDayForecast(
+                                  weatherData: weatherData,
+                                  userSettings: settings,
+                                ),
                               ),
                             ],
                           ),
