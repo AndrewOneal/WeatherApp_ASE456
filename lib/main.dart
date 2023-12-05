@@ -297,11 +297,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               ),
                               SizedBox(height: KMainFlexGap),
-                              IntrinsicHeight(
-                                child: FiveDayForecast(
-                                  weatherData: weatherData,
-                                  navToMoreDataScreen: navToMoreDataScreen,
-                                ),
+                              // Wrap FiveDayForecast in a Container with a specified height
+                              Container(
+                                height: 500, // Adjust the height as needed
+
+                                child:
+                                    FiveDayForecast(weatherData: weatherData),
                               ),
                             ],
                           ),
