@@ -19,8 +19,9 @@ class CheckLocation extends CheckNotification {
     if (weatherData != null) {
       if (weatherData['main']['temp'] > 37.78) {
         notify = true;
-        emergencyMessage +=
-            'EMERGENCY: The temperature is ${temp} - STAY INDOORS!\n';
+        emergencyMessage += temperatureUnit == 0
+            ? 'EMERGENCY: The temperature is ${temp}°C - STAY INDOORS!\n'
+            : 'EMERGENCY: The temperature is ${temp}°F - STAY INDOORS!\n';
       } else if (weatherData['main']['temp'] < -15) {
         notify = true;
         emergencyMessage +=
@@ -54,13 +55,17 @@ class CheckLocation extends CheckNotification {
       if (userSettings['minTemperature'] != null) {
         if (userSettings['minTemperature']! >= temperature) {
           notify = true;
-          alertMessage += 'ALERT: The temperature is ${temp}\n';
+          alertMessage += temperatureUnit == 0
+              ? 'ALERT: The temperature is ${temp}°C\n'
+              : 'ALERT: The temperature is ${temp}°F\n';
         }
       }
       if (userSettings['maxTemperature'] != null) {
         if (userSettings['maxTemperature']! <= temperature) {
           notify = true;
-          alertMessage += 'ALERT: The temperature is ${temp}\n';
+          alertMessage += temperatureUnit == 0
+              ? 'ALERT: The temperature is ${temp}°C\n'
+              : 'ALERT: The temperature is ${temp}°F\n';
         }
       }
       if (userSettings['visibility'] != null) {
