@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String currentTemp = 'Celsius';
   var weatherData;
   var pastWeatherData;
-  Map<String, double?> settings = {};
+  Map<String, double?> settings = {'temperatureUnit': 0.0};
   CheckLocation location = CheckLocation();
 
   @override
@@ -210,6 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
       this.settings['maxTemperature'] = results['maxTemperature'];
       this.settings['visibility'] = results['visibility'];
       this.settings['wind'] = results['wind'];
+      this.settings['temperatureUnit'] = results['temperatureUnit'];
     });
     checkLocationEmergency();
   }
@@ -233,7 +234,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Top(
           onSearch: onSearch,
           onNavigateToPage1: navigateToPage1,
-          currentTemp: currentTemp,
+          //currentTemp: currentTemp,
+          onNavigateToPage2: navigateToPage2,
           updateTempCallback: updateCurrentTemp,
         ),
       ),

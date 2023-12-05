@@ -7,34 +7,21 @@ import 'package:flutter/material.dart';
 class Top extends StatelessWidget {
   final Function onSearch;
   final Function onNavigateToPage1;
-  final String currentTemp;
   final Function updateTempCallback;
+  final Function onNavigateToPage2;
 
   final TextEditingController _searchController = TextEditingController();
 
-  Top({
-    required this.onSearch,
-    required this.onNavigateToPage1,
-    required this.currentTemp,
-    required this.updateTempCallback,
-  });
+  Top(
+      {required this.onSearch,
+      required this.onNavigateToPage1,
+      required this.updateTempCallback,
+      required this.onNavigateToPage2});
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     bool isMobile = screenWidth <= 600;
-    Future<void> showSettingsDialog(BuildContext context) async {
-      return showDialog(
-        context: context,
-        builder: (context) => SettingsModal(
-          onClose: () {
-            Navigator.pop(context);
-          },
-          currentTemp: currentTemp,
-          updateTempCallback: updateTempCallback,
-        ),
-      );
-    }
 
     return Container(
       height: isMobile ? 200 : 80.0,
@@ -54,9 +41,7 @@ class Top extends StatelessWidget {
                         controller: _searchController, onSearch: onSearch),
                     ButtonContainer(
                       onNavigateToPage1: onNavigateToPage1,
-                      onSettingsPressed: () {
-                        showSettingsDialog(context);
-                      },
+                      onSettingsPressed: onNavigateToPage2,
                     )
                   ],
                 ),
@@ -68,9 +53,7 @@ class Top extends StatelessWidget {
                   controller: _searchController, onSearch: onSearch),
               ButtonContainer(
                 onNavigateToPage1: onNavigateToPage1,
-                onSettingsPressed: () {
-                  showSettingsDialog(context);
-                },
+                onSettingsPressed: onNavigateToPage2,
               )
             ]),
     );
