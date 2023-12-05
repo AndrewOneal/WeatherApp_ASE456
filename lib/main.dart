@@ -181,9 +181,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => MoreData(
-                weatherData: weatherData,
-              )),
+        builder: (context) => MoreData(
+          weatherData: weatherData,
+        ),
+      ),
     );
   }
 
@@ -295,8 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               SizedBox(height: KMainFlexGap),
                               // Wrap FiveDayForecast in a Container with a specified height
                               Container(
-                                height: 500, // Adjust the height as needed
-
+                                height: 625, // Adjust the height as needed
                                 child:
                                     FiveDayForecast(weatherData: weatherData),
                               ),

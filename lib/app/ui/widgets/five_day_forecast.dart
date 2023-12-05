@@ -94,7 +94,7 @@ class _FiveDayForecastState extends State<FiveDayForecast> {
       child: Padding(
         padding: const EdgeInsets.all(25),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
+          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
