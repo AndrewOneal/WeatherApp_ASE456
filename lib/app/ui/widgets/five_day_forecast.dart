@@ -23,7 +23,6 @@ class _FiveDayForecastState extends State<FiveDayForecast> {
 
   Future<void> getFiveDayForecast() async {
     if (widget.weatherData.containsKey('coord')) {
-      print('WEATHER DATA::::: ${widget.weatherData}');
       final apiKey =
           '7f3c31771e30e2e03d2f2a5e6b49db90'; // Replace with your API key
       final lat = widget.weatherData['coord']['lat'];
@@ -57,17 +56,10 @@ class _FiveDayForecastState extends State<FiveDayForecast> {
         // Processing each group to create daily summaries
         groupedForecast.forEach(
           (key, value) {
-            double avgTemp = widget.userSettings['temperatureUnit'] == 0
-                ? value
-                        .map<double>((item) => item['main']['temp'])
-                        .reduce((a, b) => a + b) /
-                    value.length
-                : value
-                        .map<double>((item) => double.parse(
-                            TemperatureConverter.celsiusToFahrenheit(
-                                item['main']['temp'])))
-                        .reduce((a, b) => a + b) /
-                    value.length;
+            double avgTemp = value
+                    .map<double>((item) => item['main']['temp'])
+                    .reduce((a, b) => a + b) /
+                value.length;
             String mainCondition = value[0]['weather'][0]['main'];
 
             setState(

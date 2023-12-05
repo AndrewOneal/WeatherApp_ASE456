@@ -310,27 +310,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               ),
                               SizedBox(height: KMainFlexGap),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: WeatherDescription(
-                                      weatherData: weatherData,
-                                    ),
-                                  ),
-                                  SizedBox(width: KMainFlexGap),
-                                  Expanded(
-                                    child: BoxWidget(
-                                      color: Colors.purple,
-                                      border: KThemeBorders.border_md,
-                                      borderRadius:
-                                          KThemeBorderRadius.borderRadius_md,
-                                      height: 300,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: KMainFlexGap),
                               IntrinsicHeight(
                                 child: WeatherDescription(
                                   weatherData: weatherData,
