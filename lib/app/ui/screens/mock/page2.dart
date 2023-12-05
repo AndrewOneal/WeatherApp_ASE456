@@ -17,6 +17,7 @@ class _Page2State extends State<Page2> {
   late TextEditingController maxTemperatureController;
   late TextEditingController visibilityController;
   late TextEditingController windSpeedController;
+  String? temperature = 'Celcius';
 
   @override
   void initState() {
@@ -101,6 +102,22 @@ class _Page2State extends State<Page2> {
                 },
               ),
             ),
+            ListTile(
+              title: const Text('Change Temperature Value'),
+              subtitle: DropdownButton<String>(
+                value: temperature,
+                items: ['Celcius', 'Farenheight']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                      child: Text(value), value: value);
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    temperature = value;
+                  });
+                },
+              ),
+            ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
@@ -108,7 +125,8 @@ class _Page2State extends State<Page2> {
                   'minTemperature': minTemperature,
                   'maxTemperature': maxTemperature,
                   'visibility': visibility,
-                  'wind': wind
+                  'wind': wind,
+                  'temperatureUnit': temperature == 'Celcius' ? 0 : 1,
                 });
               },
               child: const Text('Save Settings'),
