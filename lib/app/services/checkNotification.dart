@@ -51,21 +51,17 @@ class CheckLocation extends CheckNotification {
         : weatherData['main']['temp'].toString();
 
     double temperature = double.parse(temp);
-
-    print('TEMP B4 CONVERT:::::: ${weatherData['main']['temp']}');
-    print('TEMP:::::::: $temp');
-
     if (weatherData != null) {
       if (userSettings['minTemperature'] != null) {
         if (userSettings['minTemperature']! >= temperature) {
           notify = true;
-          alertMessage += 'ALERT: The temperature is ${temperature}\n';
+          alertMessage += 'ALERT: The temperature is ${temp}\n';
         }
       }
       if (userSettings['maxTemperature'] != null) {
         if (userSettings['maxTemperature']! <= temperature) {
           notify = true;
-          alertMessage += 'ALERT: The temperature is ${temperature}\n';
+          alertMessage += 'ALERT: The temperature is ${temp}\n';
         }
       }
       if (userSettings['visibility'] != null) {
