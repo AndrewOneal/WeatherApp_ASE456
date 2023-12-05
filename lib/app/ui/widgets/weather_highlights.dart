@@ -493,9 +493,11 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                             size: 40,
                           ),
                           Text(
-                            weatherData == null
-                                ? '-'
-                                : "${TemperatureConverter.kelvinToCelsius(weatherData['main']['feels_like'])}°C",
+                            weatherData != null
+                                ? widget.userSettings['temperatureUnit'] == 0.0
+                                    ? '${weatherData['main']['feels_like']}°C'
+                                    : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['feels_like'])}°F'
+                                : '-',
                             style: TextStyle(
                                 fontSize: 40,
                                 color: KThemeColors.text_dimWhite,
