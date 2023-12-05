@@ -1,7 +1,6 @@
 import 'package:climate/app/ui/widgets/top/button_container.dart';
 import 'package:climate/app/ui/widgets/top/logo.dart';
 import 'package:climate/app/ui/widgets/top/search_bar.dart';
-import 'package:climate/app/ui/widgets/top/settings_modal.dart';
 import 'package:flutter/material.dart';
 
 class Top extends StatelessWidget {
