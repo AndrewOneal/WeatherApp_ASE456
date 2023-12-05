@@ -367,7 +367,9 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                 ),
                                 Text(
                                   weatherData != null
-                                      ? "${weatherData['wind']['gust']}"
+                                      ? weatherData['wind']['gust'] == null
+                                          ? '0'
+                                          : "${weatherData['wind']['gust']}"
                                       : '-m/s',
                                   style: TextStyle(
                                       fontSize: 25,
