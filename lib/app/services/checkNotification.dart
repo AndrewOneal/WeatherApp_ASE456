@@ -12,17 +12,16 @@ class CheckLocation extends CheckNotification {
   bool checkEmergency(var weatherData, Map<String, double?> userSettings) {
     String emergencyMessage = '';
     double? temperatureUnit = userSettings['temperatureUnit'];
-
     String temp = temperatureUnit == 1
         ? TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp'])
         : weatherData['main']['temp'].toString();
-    double temperature = double.parse(temp);
+
     if (weatherData != null) {
-      if (temperature > 37.78) {
+      if (weatherData['main']['temp'] > 37.78) {
         notify = true;
         emergencyMessage +=
             'EMERGENCY: The temperature is ${temp} - STAY INDOORS!\n';
-      } else if (temperature < -15) {
+      } else if (weatherData['main']['temp'] < -15) {
         notify = true;
         emergencyMessage +=
             'EMERGENCY: The temperature is ${temp} - STAY INDOORS\n';

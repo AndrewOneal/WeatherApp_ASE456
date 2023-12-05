@@ -8,9 +8,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class WeatherTinyInfo extends StatefulWidget {
   final dynamic weatherData;
   final Function navToMoreDataScreen;
+  final Map<String, double?> userSettings;
 
   WeatherTinyInfo(
-      {required this.weatherData, required this.navToMoreDataScreen});
+      {required this.weatherData,
+      required this.navToMoreDataScreen,
+      required this.userSettings});
 
   @override
   State<WeatherTinyInfo> createState() => _WeatherTinyInfoState();
@@ -75,7 +78,9 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text(
               weatherData != null
-                  ? "${TemperatureConverter.kelvinToCelsius(weatherData['main']['temp'])}°C"
+                  ? widget.userSettings['temperatureUnit'] == 0
+                      ? '${weatherData['main']['temp'].toString()}°C'
+                      : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp'])}°F'
                   : '-',
               style: TextStyle(fontSize: 60.0, fontWeight: FontWeight.w400),
             ),

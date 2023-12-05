@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool isLoading = true;
   String searchParam = '';
-  String currentTemp = 'Celsius';
+  //String currentTemp = 'Celsius';
   var weatherData;
   var pastWeatherData;
   Map<String, double?> settings = {'temperatureUnit': 0.0};
@@ -50,11 +50,11 @@ class _MyHomePageState extends State<MyHomePage> {
     _init_weatherData();
   }
 
-  void updateCurrentTemp(String newTemp) {
-    setState(() {
-      currentTemp = newTemp;
-    });
-  }
+  // void updateCurrentTemp(String newTemp) {
+  //   setState(() {
+  //     currentTemp = newTemp;
+  //   });
+  // }
 
   void showMaterialBanner() {
     showNotification();
@@ -237,7 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onNavigateToPage1: navigateToPage1,
           //currentTemp: currentTemp,
           onNavigateToPage2: navigateToPage2,
-          updateTempCallback: updateCurrentTemp,
+          //updateTempCallback: updateCurrentTemp,
         ),
       ),
       body: SingleChildScrollView(
@@ -252,12 +252,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           IntrinsicHeight(
                             child: WeatherTinyInfo(
-                                weatherData: weatherData,
-                                navToMoreDataScreen: navToMoreDataScreen),
+                              weatherData: weatherData,
+                              navToMoreDataScreen: navToMoreDataScreen,
+                              userSettings: settings,
+                            ),
                           ),
                           SizedBox(height: KMainFlexGap),
                           IntrinsicHeight(
-                            child: WeatherHighlights(weatherData: weatherData),
+                            child: WeatherHighlights(
+                              weatherData: weatherData,
+                              userSettings: settings,
+                            ),
                           ),
                           SizedBox(height: KMainFlexGap),
                           IntrinsicHeight(
@@ -294,6 +299,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 child: WeatherTinyInfo(
                                   weatherData: weatherData,
                                   navToMoreDataScreen: navToMoreDataScreen,
+                                  userSettings: settings,
                                 ),
                               ),
                               SizedBox(height: KMainFlexGap),
@@ -316,8 +322,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Column(
                             children: [
                               IntrinsicHeight(
-                                child:
-                                    WeatherHighlights(weatherData: weatherData),
+                                child: WeatherHighlights(
+                                  weatherData: weatherData,
+                                  userSettings: settings,
+                                ),
                               ),
                               SizedBox(height: KMainFlexGap),
                               Row(
