@@ -80,7 +80,7 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
               weatherData != null
                   ? widget.userSettings['temperatureUnit'] == 0
                       ? '${weatherData['main']['temp'].toString()}°C'
-                      : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp'])}°F' //"${TemperatureConverter.kelvinToCelsius(weatherData['main']['temp'])}°C"
+                      : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp'])}°F'
                   : '-',
               style: TextStyle(fontSize: 60.0, fontWeight: FontWeight.w400),
             ),

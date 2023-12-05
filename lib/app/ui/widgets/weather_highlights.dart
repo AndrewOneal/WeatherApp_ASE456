@@ -6,8 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WeatherHighlights extends StatefulWidget {
   final dynamic weatherData;
+  final Map<String, double?> userSettings;
 
-  WeatherHighlights({required this.weatherData});
+  WeatherHighlights({required this.weatherData, required this.userSettings});
 
   @override
   State<WeatherHighlights> createState() => _WeatherHighlightsState();
@@ -182,7 +183,11 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                 ),
                                 Text(
                                   weatherData != null
-                                      ? "${TemperatureConverter.kelvinToCelsius(weatherData['main']['temp_min'])}°C"
+                                      ? widget.userSettings[
+                                                  'temperatureUnit'] ==
+                                              0
+                                          ? '${weatherData['main']['temp_min']}°C'
+                                          : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp_min'])}°F'
                                       : '-',
                                   style: TextStyle(
                                       fontSize: 30,
@@ -660,7 +665,11 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                     ),
                                     Text(
                                       weatherData != null
-                                          ? "${TemperatureConverter.kelvinToCelsius(weatherData['main']['temp_min'])}°C"
+                                          ? widget.userSettings[
+                                                      'temperatureUnit'] ==
+                                                  0
+                                              ? '${weatherData['main']['temp_min']}°C'
+                                              : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp_min'])}°F'
                                           : '-',
                                       style: TextStyle(
                                           fontSize: 40,
@@ -701,7 +710,11 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                     ),
                                     Text(
                                       weatherData != null
-                                          ? "${TemperatureConverter.kelvinToCelsius(weatherData['main']['temp_max'])}°C"
+                                          ? widget.userSettings[
+                                                      'temperatureUnit'] ==
+                                                  0
+                                              ? '${weatherData['main']['temp_max']}°C'
+                                              : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp_max'])}°F'
                                           : '-',
                                       style: TextStyle(
                                           fontSize: 40,
@@ -837,9 +850,12 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
                                 size: 40,
                               ),
                               Text(
-                                weatherData == null
-                                    ? '-'
-                                    : "${TemperatureConverter.kelvinToCelsius(weatherData['main']['feels_like'])}°C",
+                                weatherData != null
+                                    ? widget.userSettings['temperatureUnit'] ==
+                                            0
+                                        ? '${weatherData['main']['feels_like']}°C'
+                                        : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['feels_like'])}°F'
+                                    : '-',
                                 style: TextStyle(
                                     fontSize: 40,
                                     color: KThemeColors.text_dimWhite,

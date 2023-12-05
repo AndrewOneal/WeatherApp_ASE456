@@ -259,7 +259,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           SizedBox(height: KMainFlexGap),
                           IntrinsicHeight(
-                            child: WeatherHighlights(weatherData: weatherData),
+                            child: WeatherHighlights(
+                              weatherData: weatherData,
+                              userSettings: settings,
+                            ),
                           ),
                           SizedBox(height: KMainFlexGap),
                           IntrinsicHeight(
@@ -319,8 +322,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Column(
                             children: [
                               IntrinsicHeight(
-                                child:
-                                    WeatherHighlights(weatherData: weatherData),
+                                child: WeatherHighlights(
+                                  weatherData: weatherData,
+                                  userSettings: settings,
+                                ),
                               ),
                               SizedBox(height: KMainFlexGap),
                               Row(
