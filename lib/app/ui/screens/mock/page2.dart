@@ -53,6 +53,7 @@ class _Page2State extends State<Page2> {
       appBar: AppBar(
         title: Text('Settings'),
       ),
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
           children: [
