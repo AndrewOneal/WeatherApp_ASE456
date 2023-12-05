@@ -2,8 +2,9 @@
 
 #### *Story 1: Outdoor Adventure*
 
-As an outdoor enthusiast, I want to swiftly access real-time weather data for my current location to plan outdoor activities.
-
+* **User Story:** As an android user, I want to swiftly access real-time weather data for my current location to plan outdoor activities.
+  * This allows me to be able to use my phone to plan my activities without the need to use the app on the web
+    
 ##### Scenario:
 1. **Objective**: Check weather details before heading outdoors.
 2. **Action**:
@@ -17,7 +18,8 @@ As an outdoor enthusiast, I want to swiftly access real-time weather data for my
 
 #### *Story 2: Daily Planning*
 
-As a daily commuter, I require current weather information for my location to plan my daily commute effectively.
+* **User Story:** As a daily commuter, I require current weather information on the go for my location to plan my daily commute effectively.
+  * This allows me to access weather information on my android from anywhere while traveling.
 
 ##### Scenario:
 1. **Objective**: Check weather conditions for commute planning.
@@ -32,7 +34,8 @@ As a daily commuter, I require current weather information for my location to pl
 
 #### *Story 3: Travel Preparation*
 
-As someone planning a trip, I want a convenient way to check the weather in different locations.
+* **User Story:** As someone planning a trip, I want a convenient way to check the weather in different locations on my android.
+  * This allows me to switch between a selected location and my current location on mobile. 
 
 ##### Scenario:
 1. **Objective**: Obtain weather data for various travel destinations.
