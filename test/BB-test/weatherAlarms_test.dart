@@ -15,14 +15,16 @@ void main() {
       'minTemperature': 100,
       'maxTemperature': 0,
       'visibility': 100,
-      'wind': 0
+      'wind': 0,
+      'temperatureUnit': 0
     };
 
     expect(notification.checkAlert(mockWeatherData, mockUserSettings), true);
 
     expect(
         notification.message,
-        'ALERT: The temperature is 212F\n'
+        'ALERT: The temperature is 100\n'
+        'ALERT: The temperature is 100\n'
         'ALERT: The visibility is about 0mi\n'
         'ALERT: wind speeds are at 223 mph\n');
   });
