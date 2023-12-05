@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String currentTemp = 'Celsius';
   var weatherData;
   var pastWeatherData;
-  Map<String, double?> settings = {};
+  Map<String, double?> settings = {'temperatureUnit': 0.0};
   CheckLocation location = CheckLocation();
 
   @override

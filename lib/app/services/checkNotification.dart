@@ -36,6 +36,7 @@ class CheckLocation extends CheckNotification {
 
   @override
   bool checkAlert(var weatherData, Map<String, double?> userSettings) {
+    double? temperatureUnit = userSettings['temperatureUnit'];
     String alertMessage = '';
     if (weatherData != null) {
       if (userSettings['minTemperature'] != null) {
