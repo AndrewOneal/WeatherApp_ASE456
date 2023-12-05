@@ -2,11 +2,11 @@
 
 ## Introduction
 
-The Emergency Weather Alerts feature is designed to keep users informed about potential weather emergencies in their current location. It provides timely notifications to ensure user safety during adverse weather conditions.
+The Emergency Weather Alerts feature is designed to keep users informed about potential weather emergencies in their current location as well as locations they search for. It provides timely notifications to ensure user safety during adverse weather conditions.
 
 ## How to use
 
-Emergency Weather Alerts are enabled by degfault and are not able to be toggled. When there is a weather emergency in your area a banner will appear at the top of the screen alerting you of the emergency.
+Emergency Weather Alerts are enabled by degfault and are not able to be toggled. When there is a weather emergency in your area/an area you search for, a banner will appear at the top of the screen alerting you of the emergency.
 
 ### What determines an emergency
 

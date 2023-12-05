@@ -15,3 +15,7 @@ As a user, I don't like to drive when it is very windy. I would like to be notif
 ## User Story 4
 
 As a user, I would like to be notified when the temperature is above 60 F, I expect to be able to do this in a settings page, and for the notification to be shown in a banner at the top of the page.
+
+## User Story 5
+
+As a user, I would like to be notified of high winds in a city that I am traveling to. If I set my parameters to notify me when wind speeds are over 10mph, I want to be notified if the winds are above 10mph in the city I search for.
