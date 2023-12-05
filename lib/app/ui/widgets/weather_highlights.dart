@@ -39,7 +39,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
