@@ -38,7 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool isLoading = true;
   String searchParam = '';
-  //String currentTemp = 'Celsius';
   var weatherData;
   var pastWeatherData;
   Map<String, double?> settings = {'temperatureUnit': 0.0};
@@ -49,12 +48,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _init_weatherData();
   }
-
-  // void updateCurrentTemp(String newTemp) {
-  //   setState(() {
-  //     currentTemp = newTemp;
-  //   });
-  // }
 
   void showMaterialBanner() {
     showNotification();
@@ -161,9 +154,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ToastManager.showSuccess(
             'Weather data retrieved successfully',
           );
-          print(weatherData);
-          print(weatherData.runtimeType);
-          // print(weatherData);
         }
       } else {
         weatherData = await weatherModel.getLocationWeather();

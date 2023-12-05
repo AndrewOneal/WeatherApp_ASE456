@@ -53,6 +53,7 @@ class _Page2State extends State<Page2> {
       appBar: AppBar(
         title: Text('Settings'),
       ),
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
           children: [
@@ -130,7 +131,7 @@ class _Page2State extends State<Page2> {
                   'maxTemperature': maxTemperature,
                   'visibility': visibility,
                   'wind': wind,
-                  'temperatureUnit': temperature == 'Celcius' ? 0 : 1,
+                  'temperatureUnit': temperature == 'Celcius' ? 0.0 : 1.0,
                 });
               },
               child: const Text('Save Settings'),

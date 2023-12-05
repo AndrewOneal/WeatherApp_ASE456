@@ -78,7 +78,7 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text(
               weatherData != null
-                  ? widget.userSettings['temperatureUnit'] == 0
+                  ? widget.userSettings['temperatureUnit'] == 0.0
                       ? '${weatherData['main']['temp'].toString()}°C'
                       : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp'])}°F'
                   : '-',
