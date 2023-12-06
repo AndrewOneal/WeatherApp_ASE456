@@ -25,6 +25,7 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
   late var textColor;
   @override
   void initState() {
+    super.initState();
     textColor = DarkModeChanger.toggleDarkLightText(widget.userSettings);
   }
 
