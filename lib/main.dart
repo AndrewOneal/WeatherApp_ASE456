@@ -7,6 +7,7 @@ import 'package:climate/app/ui/widgets/weather_description.dart';
 import 'package:climate/app/ui/widgets/weather_highlights.dart';
 import 'package:climate/app/ui/widgets/weather_tiny_info.dart';
 import 'package:climate/app/ui/widgets/five_day_forecast.dart';
+import 'package:climate/app/services/darkModeChanger.dart';
 import 'package:climate/app/utilities/constants.dart';
 import 'package:climate/app/utilities/custom_toast.dart';
 import 'package:flutter/material.dart';
@@ -198,6 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
       this.settings['visibility'] = results['visibility'];
       this.settings['wind'] = results['wind'];
       this.settings['temperatureUnit'] = results['temperatureUnit'];
+      this.settings['darkMode'] = results['darkMode'];
     });
     checkLocationEmergency();
   }
@@ -253,8 +255,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           SizedBox(height: KMainFlexGap),
                           IntrinsicHeight(
                             child: WeatherDescription(
-                              weatherData: weatherData,
-                            ),
+                                weatherData: weatherData,
+                                userSettings: settings),
                           ),
                           SizedBox(height: KMainFlexGap),
                           Container(
@@ -310,8 +312,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               SizedBox(height: KMainFlexGap),
                               IntrinsicHeight(
                                 child: WeatherDescription(
-                                  weatherData: weatherData,
-                                ),
+                                    weatherData: weatherData,
+                                    userSettings: settings),
                               ),
                             ],
                           ),

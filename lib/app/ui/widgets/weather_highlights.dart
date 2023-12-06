@@ -1,5 +1,6 @@
 import 'package:climate/app/services/TemperatureConverter.dart';
 import 'package:climate/app/services/timeUtils.dart';
+import 'package:climate/app/services/darkModeChanger.dart';
 import 'package:climate/app/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,7 +32,7 @@ class _WeatherHighlightsState extends State<WeatherHighlights> {
       height: isMobile ? 1220 : 450,
       decoration: BoxDecoration(
         border: KThemeBorders.border_md,
-        color: KThemeColors.bg_lightBlue,
+        color: DarkModeChanger.toggleDarkLightBG(widget.userSettings),
         borderRadius: KThemeBorderRadius.borderRadius_md,
       ),
       child: isMobile

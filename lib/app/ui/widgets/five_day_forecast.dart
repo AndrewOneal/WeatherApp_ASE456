@@ -1,7 +1,9 @@
 import 'package:climate/app/services/TemperatureConverter.dart';
 import 'package:flutter/material.dart';
+import 'package:climate/app/services/darkModeChanger.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:climate/app/utilities/constants.dart';
 
 class FiveDayForecast extends StatefulWidget {
   final Map<String, dynamic> weatherData;
@@ -14,11 +16,15 @@ class FiveDayForecast extends StatefulWidget {
 }
 
 class _FiveDayForecastState extends State<FiveDayForecast> {
+  // Get the dark mode's changed color
+  late var textColor;
+
   Map<String, dynamic> dailySummaries = {};
   @override
   void initState() {
     super.initState();
     this.getFiveDayForecast();
+    textColor = DarkModeChanger.toggleDarkLightText(widget.userSettings);
   }
 
   Future<void> getFiveDayForecast() async {
@@ -38,8 +44,6 @@ class _FiveDayForecastState extends State<FiveDayForecast> {
         var data = json.decode(response.body);
         var forecastList = data['list'] as List<dynamic>;
         Map<String, List<dynamic>> groupedForecast = {};
-
-        // print('FORECAST LIST::: $forecastList');
 
         // Grouping data by date
         for (var weatherData in forecastList) {
@@ -81,7 +85,7 @@ class _FiveDayForecastState extends State<FiveDayForecast> {
 
   Widget buildForecastCard(String date, Map<String, dynamic> summary) {
     return Card(
-      color: Colors.transparent,
+      color: KThemeColors.bg_darkBlue,
       child: ListTile(
         title: Text(date),
         subtitle: Text(widget.userSettings['temperatureUnit'] == 0
@@ -98,8 +102,9 @@ class _FiveDayForecastState extends State<FiveDayForecast> {
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.white),
-          color: Color.fromARGB(255, 25, 31, 39)),
+          border: Border.all(
+              color: DarkModeChanger.toggleDarkLightText(widget.userSettings)),
+          color: DarkModeChanger.toggleDarkLightBG(widget.userSettings)),
       child: Padding(
         padding: const EdgeInsets.all(25),
         child: Container(
@@ -109,7 +114,10 @@ class _FiveDayForecastState extends State<FiveDayForecast> {
             children: [
               Text(
                 '5-Day Forecast',
-                style: TextStyle(fontSize: 28),
+                style: TextStyle(
+                    fontSize: 28,
+                    color: DarkModeChanger.toggleDarkLightText(
+                        widget.userSettings)),
               ),
               if (dailySummaries.isNotEmpty)
                 Column(
