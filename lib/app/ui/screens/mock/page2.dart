@@ -13,6 +13,8 @@ class _Page2State extends State<Page2> {
   late double? visibility;
   late double? wind;
 
+  late double? isDarkMode;
+  late String? darkModeVal;
   late TextEditingController minTemperatureController;
   late TextEditingController maxTemperatureController;
   late TextEditingController visibilityController;
@@ -26,6 +28,7 @@ class _Page2State extends State<Page2> {
     maxTemperature = widget.userSettings['maxTemperature'];
     visibility = widget.userSettings['visibility'];
     wind = widget.userSettings['wind'];
+    isDarkMode = widget.userSettings['darkMode'];
 
     minTemperatureController = TextEditingController(
         text: minTemperature != null ? minTemperature.toString() : '');
@@ -37,6 +40,7 @@ class _Page2State extends State<Page2> {
         TextEditingController(text: wind != null ? wind.toString() : '');
     temperature =
         widget.userSettings['temperatureUnit'] == 0 ? 'Celcius' : 'Farenheight';
+    darkModeVal = widget.userSettings['darkMode'] == 0 ? 'false' : 'true';
   }
 
   double? parseDoubleOrNull(String input) {
@@ -124,6 +128,25 @@ class _Page2State extends State<Page2> {
                   },
                 ),
               ),
+              ListTile(
+                title: const Text('Dark Mode?'),
+                subtitle: DropdownButton<String>(
+                  value: darkModeVal,
+                  items: ['true', 'false']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      child: Text(value),
+                      value: value,
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      value == 'true' ? isDarkMode = 1 : isDarkMode = 0;
+                      darkModeVal = value;
+                    });
+                  },
+                ),
+              ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
@@ -133,6 +156,7 @@ class _Page2State extends State<Page2> {
                     'visibility': visibility,
                     'wind': wind,
                     'temperatureUnit': temperature == 'Celcius' ? 0.0 : 1.0,
+                    'darkMode': isDarkMode
                   });
                 },
                 child: const Text('Save Settings'),

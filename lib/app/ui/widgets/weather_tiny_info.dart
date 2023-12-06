@@ -1,6 +1,7 @@
 import 'package:climate/app/services/TemperatureConverter.dart';
 import 'package:climate/app/services/timeUtils.dart';
 import 'package:climate/app/services/weather.dart';
+import 'package:climate/app/services/darkModeChanger.dart';
 import 'package:climate/app/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,6 +21,13 @@ class WeatherTinyInfo extends StatefulWidget {
 }
 
 class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
+  // Get the dark mode's changed color
+  late var textColor;
+  @override
+  void initState() {
+    textColor = DarkModeChanger.toggleDarkLightText(widget.userSettings);
+  }
+
   @override
   Widget build(BuildContext context) {
     dynamic weatherData = widget.weatherData;
@@ -49,26 +57,30 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
                 SizedBox(width: 10.0),
                 Text(
                   'Now',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: DarkModeChanger.toggleDarkLightText(
+                          widget.userSettings)),
                 ),
               ],
             ),
             ElevatedButton(
               onPressed: () => widget.navToMoreDataScreen(),
-              child: Center(
-                child: Text('More Data'),
-              ),
+              child: Center(child: Text('More Data')),
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: KThemeBorderRadius.borderRadius_xs,
-                    side: BorderSide(color: KThemeColors.text_dimWhite),
+                    side: BorderSide(
+                        color: DarkModeChanger.toggleDarkLightText(
+                            widget.userSettings)),
                   ),
                 ),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(KThemeColors.bg_darkBlue),
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    DarkModeChanger.toggleDarkLightBG(widget.userSettings)),
                 foregroundColor: MaterialStateProperty.all<Color>(
-                    KThemeColors.text_dimWhite),
+                    DarkModeChanger.toggleDarkLightText(widget.userSettings)),
                 padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                   EdgeInsets.fromLTRB(30, 18, 30, 18),
                 ),
@@ -82,7 +94,11 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
                       ? '${weatherData['main']['temp'].toString()}°C'
                       : '${TemperatureConverter.celsiusToFahrenheit(weatherData['main']['temp'])}°F'
                   : '-',
-              style: TextStyle(fontSize: 60.0, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  fontSize: 60.0,
+                  fontWeight: FontWeight.w400,
+                  color:
+                      DarkModeChanger.toggleDarkLightText(widget.userSettings)),
             ),
           ]),
           Column(
@@ -93,7 +109,8 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: KThemeColors.text_whiteWhite),
+                    color: DarkModeChanger.toggleDarkLightText(
+                        widget.userSettings)),
               ),
               SizedBox(
                 height: 10,
@@ -119,7 +136,8 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.normal,
-                        color: KThemeColors.text_dimWhite),
+                        color: DarkModeChanger.toggleDarkLightText(
+                            widget.userSettings)),
                   ),
                 ],
               ),
@@ -142,7 +160,8 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.normal,
-                        color: KThemeColors.text_dimWhite),
+                        color: DarkModeChanger.toggleDarkLightText(
+                            widget.userSettings)),
                   ),
                 ],
               )
@@ -151,7 +170,8 @@ class _WeatherTinyInfoState extends State<WeatherTinyInfo> {
         ],
       ),
       decoration: BoxDecoration(
-          color: KThemeColors.bg_lightBlue,
+          // Changes the backgournd color based on the dark mode value
+          color: DarkModeChanger.toggleDarkLightBG(widget.userSettings),
           borderRadius: KThemeBorderRadius.borderRadius_md,
           border: KThemeBorders.border_md),
     );
