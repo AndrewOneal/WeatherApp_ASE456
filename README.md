@@ -89,5 +89,3 @@ The Weather App is developed using Flutter, a versatile framework that allows it
 # More
 
 [Feature Documentation](https://github.com/AndrewOneal/WeatherApp_ASE456/tree/main/documentation)
-
-[User Manual](https://github.com/AndrewOneal/WeatherApp_ASE456/tree/main/documentation)
