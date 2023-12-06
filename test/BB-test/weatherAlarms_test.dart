@@ -23,8 +23,8 @@ void main() {
 
     expect(
         notification.message,
-        'ALERT: The temperature is 100\n'
-        'ALERT: The temperature is 100\n'
+        'ALERT: The temperature is 100°C\n'
+        'ALERT: The temperature is 100°C\n'
         'ALERT: The visibility is about 0mi\n'
         'ALERT: wind speeds are at 223 mph\n');
   });
