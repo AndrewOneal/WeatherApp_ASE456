@@ -16,7 +16,6 @@ class FiveDayForecast extends StatefulWidget {
 }
 
 class _FiveDayForecastState extends State<FiveDayForecast> {
-  // Get the dark mode's changed color
   late var textColor;
 
   Map<String, dynamic> dailySummaries = {};
@@ -29,8 +28,7 @@ class _FiveDayForecastState extends State<FiveDayForecast> {
 
   Future<void> getFiveDayForecast() async {
     if (widget.weatherData.containsKey('coord')) {
-      final apiKey =
-          '7f3c31771e30e2e03d2f2a5e6b49db90'; // Replace with your API key
+      final apiKey = '7f3c31771e30e2e03d2f2a5e6b49db90';
       final lat = widget.weatherData['coord']['lat'];
       final lon = widget.weatherData['coord']['lon'];
 
@@ -45,7 +43,6 @@ class _FiveDayForecastState extends State<FiveDayForecast> {
         var forecastList = data['list'] as List<dynamic>;
         Map<String, List<dynamic>> groupedForecast = {};
 
-        // Grouping data by date
         for (var weatherData in forecastList) {
           DateTime date =
               DateTime.fromMillisecondsSinceEpoch(weatherData['dt'] * 1000);
@@ -57,7 +54,6 @@ class _FiveDayForecastState extends State<FiveDayForecast> {
           groupedForecast[dateKey]!.add(weatherData);
         }
 
-        // Processing each group to create daily summaries
         groupedForecast.forEach(
           (key, value) {
             double avgTemp = value
@@ -74,7 +70,6 @@ class _FiveDayForecastState extends State<FiveDayForecast> {
                 };
               },
             );
-            // Example: using first condition of the day
           },
         );
       } else {
