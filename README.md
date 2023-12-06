@@ -16,7 +16,7 @@ Our Weather App is a powerful and user-friendly application designed to keep use
 5. **Search By Location (Lulsged):** Travelers and outdoor enthusiasts can view weather forecasts for any place by just typing in the locations, making it easy to plan trips or activities in different locations.
 6. **Additional Weather Information (Lulsged):** Users can access in-depth weather data, including wind information, to stay well-informed about the weather conditions.
 7. **English Weather Interpretations (Andrey):** The app provides quick and clear representations of weather conditions, helping users decide what to wear or plan their activities accordingly.
-8. **Current Location Weather (Andrey):** Users can choose to share their location, allowing the app to provide immediate access to today's weather data for their current location.
+8. **Current Location Weather for Android (Andrey):** Android users can choose to share their location, allowing the app to provide immediate access to today's weather data for their current location.
 
 In this documentation, we will delve into the architecture, design, and data flow of the Weather App. Each section provides in-depth insights into how the application is structured, the design principles it follows, and the flow of data within the app. The documentation of each feature can be found under the `**Feature Documentation**` section of this document. 
 
@@ -25,6 +25,8 @@ In this documentation, we will delve into the architecture, design, and data flo
 ## Installation
 
 ### Running the Weather App Locally
+
+#### Git
 
 To install and run the Weather App on your local machine, follow these steps:
 
@@ -35,17 +37,34 @@ To install and run the Weather App on your local machine, follow these steps:
     ```
     git clone https://github.com/AndrewOneal/WeatherApp_ASE456
     ```
+
+#### Downloaded Zip
+
+1. **Download and unzip the Repository from Git**
+
+   The Weather App's source code can also be downloaded: https://github.com/AndrewOneal/WeatherApp_ASE456. Just download the code and unzip it.
     
-2. **Install Dependencies**
+3. **Install Dependencies**
     
     Navigate to the project directory and install the required dependencies. Since this is a Flutter app, you can use Flutter's package manager (pub) to install dependencies. Run the following commands:
+
+   #### Cloned from Git:
     
     ```
     cd WeatherApp_ASE456
     flutter pub get
     ```
+
+   #### Downloaded Zip:
+
+   Open a terminal and navigate to your the downloaded files location, then run the following command:
+
+    ```
+    flutter pub get
+    ```
+   
     
-3. **Running the App**
+5. **Running the App**
     
     You can run the Weather App on various platforms, including iOS, Android, and web browsers. Use the appropriate command to launch the app on your desired platform:
     
@@ -69,6 +88,6 @@ The Weather App is developed using Flutter, a versatile framework that allows it
 
 # More
 
-[Feature Documentation](https://www.notion.so/Feature-Documentation-59f700d995984c01ab25f5f94dcbab65?pvs=21)
+[Feature Documentation](https://github.com/AndrewOneal/WeatherApp_ASE456/tree/main/documentation)
 
-[User Manual](https://www.notion.so/User-Manual-9568e7afadcc41769899c317eb96b9c1?pvs=21)
+[User Manual](https://github.com/AndrewOneal/WeatherApp_ASE456/tree/main/documentation)
